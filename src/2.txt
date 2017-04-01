@@ -1,0 +1,818 @@
+==================== StartDatagram ====================
+
+datagramSourceIP                    50.50.50.2
+datagramSize                        260
+unixSecondsUTC                      1454543195
+datagramVersion                     5
+AgentSubId                          0
+Agent                               10.2.48.191
+PacketSequenceNo                    36837
+SysUpTime                           6200786
+samplesInPacket                     2
+==================== StartSample ======================
+sampleType_tag                      0:2
+sampleType:                         COUNTERSSAMPLE
+sampleSequenceNo                    6139
+sourceId                            1:501
+counterBlock_tag                    0:1
+format 0 == id ==4096 
+format 1 == id ==0 
+!!!!!!!!!!!tag == 1; tag1 = 16777216
+
+hit SFLCOUNTERS_GENERIC:
+
+<<Inside readCounters_a10_generic>>>
+uuid = 
+obj_stats_oid = 791808 
+schema oid = 791808
+vnp_id of ctr = 6302208
+Number of counters = 3
+==================== EndDatagram ======================
+
+==================== StartDatagram ====================
+
+datagramSourceIP                    50.50.50.2
+datagramSize                        144
+unixSecondsUTC                      1454543195
+datagramVersion                     5
+AgentSubId                          0
+Agent                               10.2.48.191
+PacketSequenceNo                    36838
+SysUpTime                           6200786
+samplesInPacket                     1
+==================== StartSample ======================
+sampleType_tag                      0:2
+sampleType:                         COUNTERSSAMPLE
+sampleSequenceNo                    6139
+sourceId                            0:1
+counterBlock_tag                    0:1
+format 0 == id ==4096 
+format 1 == id ==0 
+!!!!!!!!!!!tag == 1; tag1 = 16777216
+
+hit SFLCOUNTERS_GENERIC:
+
+<<Inside readCounters_a10_generic>>>
+uuid = 
+obj_stats_oid = 0 
+schema oid = 0
+vnp_id of ctr = 0
+Number of counters = 3
+==================== EndDatagram ======================
+
+==================== StartDatagram ====================
+
+datagramSourceIP                    50.50.50.2
+datagramSize                        137
+unixSecondsUTC                      1454543195
+datagramVersion                     5
+AgentSubId                          0
+Agent                               10.2.48.191
+PacketSequenceNo                    36839
+SysUpTime                           6201310
+samplesInPacket                     1
+==================== StartSample ======================
+sampleType_tag                      40842:3001
+skipping unknown sample: 40842:3001 len=101
+==================== EndDatagram ======================
+
+==================== StartDatagram ====================
+
+datagramSourceIP                    50.50.50.2
+datagramSize                        209
+unixSecondsUTC                      1454543195
+datagramVersion                     5
+AgentSubId                          0
+Agent                               10.2.48.191
+PacketSequenceNo                    36840
+SysUpTime                           6201310
+samplesInPacket                     1
+==================== StartSample ======================
+sampleType_tag                      40842:3001
+skipping unknown sample: 40842:3001 len=173
+==================== EndDatagram ======================
+
+==================== StartDatagram ====================
+
+datagramSourceIP                    50.50.50.2
+datagramSize                        473
+unixSecondsUTC                      1454543195
+datagramVersion                     5
+AgentSubId                          0
+Agent                               10.2.48.191
+PacketSequenceNo                    36841
+SysUpTime                           6201310
+samplesInPacket                     1
+==================== StartSample ======================
+sampleType_tag                      40842:3001
+skipping unknown sample: 40842:3001 len=437
+==================== EndDatagram ======================
+
+==================== StartDatagram ====================
+
+datagramSourceIP                    50.50.50.2
+datagramSize                        413
+unixSecondsUTC                      1454543195
+datagramVersion                     5
+AgentSubId                          0
+Agent                               10.2.48.191
+PacketSequenceNo                    36842
+SysUpTime                           6201314
+samplesInPacket                     1
+==================== StartSample ======================
+sampleType_tag                      40842:3001
+skipping unknown sample: 40842:3001 len=377
+==================== EndDatagram ======================
+
+==================== StartDatagram ====================
+
+datagramSourceIP                    50.50.50.2
+datagramSize                        260
+unixSecondsUTC                      1454543196
+datagramVersion                     5
+AgentSubId                          0
+Agent                               10.2.48.191
+PacketSequenceNo                    36843
+SysUpTime                           6201786
+samplesInPacket                     2
+==================== StartSample ======================
+sampleType_tag                      0:2
+sampleType:                         COUNTERSSAMPLE
+sampleSequenceNo                    6140
+sourceId                            1:501
+counterBlock_tag                    0:1
+format 0 == id ==4096 
+format 1 == id ==0 
+!!!!!!!!!!!tag == 1; tag1 = 16777216
+
+hit SFLCOUNTERS_GENERIC:
+
+<<Inside readCounters_a10_generic>>>
+uuid = 
+obj_stats_oid = 791808 
+schema oid = 791808
+vnp_id of ctr = 6302464
+Number of counters = 3
+==================== EndDatagram ======================
+
+==================== StartDatagram ====================
+
+datagramSourceIP                    50.50.50.2
+datagramSize                        144
+unixSecondsUTC                      1454543196
+datagramVersion                     5
+AgentSubId                          0
+Agent                               10.2.48.191
+PacketSequenceNo                    36844
+SysUpTime                           6201786
+samplesInPacket                     1
+==================== StartSample ======================
+sampleType_tag                      0:2
+sampleType:                         COUNTERSSAMPLE
+sampleSequenceNo                    6140
+sourceId                            0:1
+counterBlock_tag                    0:1
+format 0 == id ==4096 
+format 1 == id ==0 
+!!!!!!!!!!!tag == 1; tag1 = 16777216
+
+hit SFLCOUNTERS_GENERIC:
+
+<<Inside readCounters_a10_generic>>>
+uuid = 
+obj_stats_oid = 0 
+schema oid = 0
+vnp_id of ctr = 0
+Number of counters = 3
+==================== EndDatagram ======================
+
+==================== StartDatagram ====================
+
+datagramSourceIP                    50.50.50.2
+datagramSize                        137
+unixSecondsUTC                      1454543196
+datagramVersion                     5
+AgentSubId                          0
+Agent                               10.2.48.191
+PacketSequenceNo                    36845
+SysUpTime                           6202310
+samplesInPacket                     1
+==================== StartSample ======================
+sampleType_tag                      40842:3001
+skipping unknown sample: 40842:3001 len=101
+==================== EndDatagram ======================
+
+==================== StartDatagram ====================
+
+datagramSourceIP                    50.50.50.2
+datagramSize                        209
+unixSecondsUTC                      1454543196
+datagramVersion                     5
+AgentSubId                          0
+Agent                               10.2.48.191
+PacketSequenceNo                    36846
+SysUpTime                           6202310
+samplesInPacket                     1
+==================== StartSample ======================
+sampleType_tag                      40842:3001
+skipping unknown sample: 40842:3001 len=173
+==================== EndDatagram ======================
+
+==================== StartDatagram ====================
+
+datagramSourceIP                    50.50.50.2
+datagramSize                        473
+unixSecondsUTC                      1454543196
+datagramVersion                     5
+AgentSubId                          0
+Agent                               10.2.48.191
+PacketSequenceNo                    36847
+SysUpTime                           6202310
+samplesInPacket                     1
+==================== StartSample ======================
+sampleType_tag                      40842:3001
+skipping unknown sample: 40842:3001 len=437
+==================== EndDatagram ======================
+
+==================== StartDatagram ====================
+
+datagramSourceIP                    50.50.50.2
+datagramSize                        413
+unixSecondsUTC                      1454543196
+datagramVersion                     5
+AgentSubId                          0
+Agent                               10.2.48.191
+PacketSequenceNo                    36848
+SysUpTime                           6202314
+samplesInPacket                     1
+==================== StartSample ======================
+sampleType_tag                      40842:3001
+skipping unknown sample: 40842:3001 len=377
+==================== EndDatagram ======================
+
+==================== StartDatagram ====================
+
+datagramSourceIP                    50.50.50.2
+datagramSize                        260
+unixSecondsUTC                      1454543197
+datagramVersion                     5
+AgentSubId                          0
+Agent                               10.2.48.191
+PacketSequenceNo                    36849
+SysUpTime                           6202786
+samplesInPacket                     2
+==================== StartSample ======================
+sampleType_tag                      0:2
+sampleType:                         COUNTERSSAMPLE
+sampleSequenceNo                    6141
+sourceId                            1:501
+counterBlock_tag                    0:1
+format 0 == id ==4096 
+format 1 == id ==0 
+!!!!!!!!!!!tag == 1; tag1 = 16777216
+
+hit SFLCOUNTERS_GENERIC:
+
+<<Inside readCounters_a10_generic>>>
+uuid = 
+obj_stats_oid = 791808 
+schema oid = 791808
+vnp_id of ctr = 6302976
+Number of counters = 3
+==================== EndDatagram ======================
+
+==================== StartDatagram ====================
+
+datagramSourceIP                    50.50.50.2
+datagramSize                        144
+unixSecondsUTC                      1454543197
+datagramVersion                     5
+AgentSubId                          0
+Agent                               10.2.48.191
+PacketSequenceNo                    36850
+SysUpTime                           6202786
+samplesInPacket                     1
+==================== StartSample ======================
+sampleType_tag                      0:2
+sampleType:                         COUNTERSSAMPLE
+sampleSequenceNo                    6141
+sourceId                            0:1
+counterBlock_tag                    0:1
+format 0 == id ==4096 
+format 1 == id ==0 
+!!!!!!!!!!!tag == 1; tag1 = 16777216
+
+hit SFLCOUNTERS_GENERIC:
+
+<<Inside readCounters_a10_generic>>>
+uuid = 
+obj_stats_oid = 0 
+schema oid = 0
+vnp_id of ctr = 0
+Number of counters = 3
+==================== EndDatagram ======================
+
+==================== StartDatagram ====================
+
+datagramSourceIP                    50.50.50.2
+datagramSize                        137
+unixSecondsUTC                      1454543197
+datagramVersion                     5
+AgentSubId                          0
+Agent                               10.2.48.191
+PacketSequenceNo                    36851
+SysUpTime                           6203310
+samplesInPacket                     1
+==================== StartSample ======================
+sampleType_tag                      40842:3001
+skipping unknown sample: 40842:3001 len=101
+==================== EndDatagram ======================
+
+==================== StartDatagram ====================
+
+datagramSourceIP                    50.50.50.2
+datagramSize                        209
+unixSecondsUTC                      1454543197
+datagramVersion                     5
+AgentSubId                          0
+Agent                               10.2.48.191
+PacketSequenceNo                    36852
+SysUpTime                           6203310
+samplesInPacket                     1
+==================== StartSample ======================
+sampleType_tag                      40842:3001
+skipping unknown sample: 40842:3001 len=173
+==================== EndDatagram ======================
+
+==================== StartDatagram ====================
+
+datagramSourceIP                    50.50.50.2
+datagramSize                        473
+unixSecondsUTC                      1454543197
+datagramVersion                     5
+AgentSubId                          0
+Agent                               10.2.48.191
+PacketSequenceNo                    36853
+SysUpTime                           6203310
+samplesInPacket                     1
+==================== StartSample ======================
+sampleType_tag                      40842:3001
+skipping unknown sample: 40842:3001 len=437
+==================== EndDatagram ======================
+
+==================== StartDatagram ====================
+
+datagramSourceIP                    50.50.50.2
+datagramSize                        413
+unixSecondsUTC                      1454543197
+datagramVersion                     5
+AgentSubId                          0
+Agent                               10.2.48.191
+PacketSequenceNo                    36854
+SysUpTime                           6203314
+samplesInPacket                     1
+==================== StartSample ======================
+sampleType_tag                      40842:3001
+skipping unknown sample: 40842:3001 len=377
+==================== EndDatagram ======================
+
+==================== StartDatagram ====================
+
+datagramSourceIP                    50.50.50.2
+datagramSize                        260
+unixSecondsUTC                      1454543198
+datagramVersion                     5
+AgentSubId                          0
+Agent                               10.2.48.191
+PacketSequenceNo                    36855
+SysUpTime                           6203786
+samplesInPacket                     2
+==================== StartSample ======================
+sampleType_tag                      0:2
+sampleType:                         COUNTERSSAMPLE
+sampleSequenceNo                    6142
+sourceId                            1:501
+counterBlock_tag                    0:1
+format 0 == id ==4096 
+format 1 == id ==0 
+!!!!!!!!!!!tag == 1; tag1 = 16777216
+
+hit SFLCOUNTERS_GENERIC:
+
+<<Inside readCounters_a10_generic>>>
+uuid = 
+obj_stats_oid = 791808 
+schema oid = 791808
+vnp_id of ctr = 6303232
+Number of counters = 3
+==================== EndDatagram ======================
+
+==================== StartDatagram ====================
+
+datagramSourceIP                    50.50.50.2
+datagramSize                        144
+unixSecondsUTC                      1454543198
+datagramVersion                     5
+AgentSubId                          0
+Agent                               10.2.48.191
+PacketSequenceNo                    36856
+SysUpTime                           6203786
+samplesInPacket                     1
+==================== StartSample ======================
+sampleType_tag                      0:2
+sampleType:                         COUNTERSSAMPLE
+sampleSequenceNo                    6142
+sourceId                            0:1
+counterBlock_tag                    0:1
+format 0 == id ==4096 
+format 1 == id ==0 
+!!!!!!!!!!!tag == 1; tag1 = 16777216
+
+hit SFLCOUNTERS_GENERIC:
+
+<<Inside readCounters_a10_generic>>>
+uuid = 
+obj_stats_oid = 0 
+schema oid = 0
+vnp_id of ctr = 0
+Number of counters = 3
+==================== EndDatagram ======================
+
+==================== StartDatagram ====================
+
+datagramSourceIP                    50.50.50.2
+datagramSize                        137
+unixSecondsUTC                      1454543198
+datagramVersion                     5
+AgentSubId                          0
+Agent                               10.2.48.191
+PacketSequenceNo                    36857
+SysUpTime                           6204310
+samplesInPacket                     1
+==================== StartSample ======================
+sampleType_tag                      40842:3001
+skipping unknown sample: 40842:3001 len=101
+==================== EndDatagram ======================
+
+==================== StartDatagram ====================
+
+datagramSourceIP                    50.50.50.2
+datagramSize                        209
+unixSecondsUTC                      1454543198
+datagramVersion                     5
+AgentSubId                          0
+Agent                               10.2.48.191
+PacketSequenceNo                    36858
+SysUpTime                           6204310
+samplesInPacket                     1
+==================== StartSample ======================
+sampleType_tag                      40842:3001
+skipping unknown sample: 40842:3001 len=173
+==================== EndDatagram ======================
+
+==================== StartDatagram ====================
+
+datagramSourceIP                    50.50.50.2
+datagramSize                        473
+unixSecondsUTC                      1454543198
+datagramVersion                     5
+AgentSubId                          0
+Agent                               10.2.48.191
+PacketSequenceNo                    36859
+SysUpTime                           6204310
+samplesInPacket                     1
+==================== StartSample ======================
+sampleType_tag                      40842:3001
+skipping unknown sample: 40842:3001 len=437
+==================== EndDatagram ======================
+
+==================== StartDatagram ====================
+
+datagramSourceIP                    50.50.50.2
+datagramSize                        413
+unixSecondsUTC                      1454543198
+datagramVersion                     5
+AgentSubId                          0
+Agent                               10.2.48.191
+PacketSequenceNo                    36860
+SysUpTime                           6204314
+samplesInPacket                     1
+==================== StartSample ======================
+sampleType_tag                      40842:3001
+skipping unknown sample: 40842:3001 len=377
+==================== EndDatagram ======================
+
+==================== StartDatagram ====================
+
+datagramSourceIP                    50.50.50.2
+datagramSize                        260
+unixSecondsUTC                      1454543199
+datagramVersion                     5
+AgentSubId                          0
+Agent                               10.2.48.191
+PacketSequenceNo                    36861
+SysUpTime                           6204786
+samplesInPacket                     2
+==================== StartSample ======================
+sampleType_tag                      0:2
+sampleType:                         COUNTERSSAMPLE
+sampleSequenceNo                    6143
+sourceId                            1:501
+counterBlock_tag                    0:1
+format 0 == id ==4096 
+format 1 == id ==0 
+!!!!!!!!!!!tag == 1; tag1 = 16777216
+
+hit SFLCOUNTERS_GENERIC:
+
+<<Inside readCounters_a10_generic>>>
+uuid = 
+obj_stats_oid = 791808 
+schema oid = 791808
+vnp_id of ctr = 6303488
+Number of counters = 3
+==================== EndDatagram ======================
+
+==================== StartDatagram ====================
+
+datagramSourceIP                    50.50.50.2
+datagramSize                        144
+unixSecondsUTC                      1454543199
+datagramVersion                     5
+AgentSubId                          0
+Agent                               10.2.48.191
+PacketSequenceNo                    36862
+SysUpTime                           6204786
+samplesInPacket                     1
+==================== StartSample ======================
+sampleType_tag                      0:2
+sampleType:                         COUNTERSSAMPLE
+sampleSequenceNo                    6143
+sourceId                            0:1
+counterBlock_tag                    0:1
+format 0 == id ==4096 
+format 1 == id ==0 
+!!!!!!!!!!!tag == 1; tag1 = 16777216
+
+hit SFLCOUNTERS_GENERIC:
+
+<<Inside readCounters_a10_generic>>>
+uuid = 
+obj_stats_oid = 0 
+schema oid = 0
+vnp_id of ctr = 0
+Number of counters = 3
+==================== EndDatagram ======================
+
+==================== StartDatagram ====================
+
+datagramSourceIP                    50.50.50.2
+datagramSize                        137
+unixSecondsUTC                      1454543199
+datagramVersion                     5
+AgentSubId                          0
+Agent                               10.2.48.191
+PacketSequenceNo                    36863
+SysUpTime                           6205310
+samplesInPacket                     1
+==================== StartSample ======================
+sampleType_tag                      40842:3001
+skipping unknown sample: 40842:3001 len=101
+==================== EndDatagram ======================
+
+==================== StartDatagram ====================
+
+datagramSourceIP                    50.50.50.2
+datagramSize                        209
+unixSecondsUTC                      1454543199
+datagramVersion                     5
+AgentSubId                          0
+Agent                               10.2.48.191
+PacketSequenceNo                    36864
+SysUpTime                           6205310
+samplesInPacket                     1
+==================== StartSample ======================
+sampleType_tag                      40842:3001
+skipping unknown sample: 40842:3001 len=173
+==================== EndDatagram ======================
+
+==================== StartDatagram ====================
+
+datagramSourceIP                    50.50.50.2
+datagramSize                        473
+unixSecondsUTC                      1454543199
+datagramVersion                     5
+AgentSubId                          0
+Agent                               10.2.48.191
+PacketSequenceNo                    36865
+SysUpTime                           6205310
+samplesInPacket                     1
+==================== StartSample ======================
+sampleType_tag                      40842:3001
+skipping unknown sample: 40842:3001 len=437
+==================== EndDatagram ======================
+
+==================== StartDatagram ====================
+
+datagramSourceIP                    50.50.50.2
+datagramSize                        413
+unixSecondsUTC                      1454543199
+datagramVersion                     5
+AgentSubId                          0
+Agent                               10.2.48.191
+PacketSequenceNo                    36866
+SysUpTime                           6205314
+samplesInPacket                     1
+==================== StartSample ======================
+sampleType_tag                      40842:3001
+skipping unknown sample: 40842:3001 len=377
+==================== EndDatagram ======================
+
+==================== StartDatagram ====================
+
+datagramSourceIP                    50.50.50.2
+datagramSize                        260
+unixSecondsUTC                      1454543200
+datagramVersion                     5
+AgentSubId                          0
+Agent                               10.2.48.191
+PacketSequenceNo                    36867
+SysUpTime                           6205786
+samplesInPacket                     2
+==================== StartSample ======================
+sampleType_tag                      0:2
+sampleType:                         COUNTERSSAMPLE
+sampleSequenceNo                    6144
+sourceId                            1:501
+counterBlock_tag                    0:1
+format 0 == id ==4096 
+format 1 == id ==0 
+!!!!!!!!!!!tag == 1; tag1 = 16777216
+
+hit SFLCOUNTERS_GENERIC:
+
+<<Inside readCounters_a10_generic>>>
+uuid = 
+obj_stats_oid = 791808 
+schema oid = 791808
+vnp_id of ctr = 6303744
+Number of counters = 3
+==================== EndDatagram ======================
+
+==================== StartDatagram ====================
+
+datagramSourceIP                    50.50.50.2
+datagramSize                        144
+unixSecondsUTC                      1454543200
+datagramVersion                     5
+AgentSubId                          0
+Agent                               10.2.48.191
+PacketSequenceNo                    36868
+SysUpTime                           6205786
+samplesInPacket                     1
+==================== StartSample ======================
+sampleType_tag                      0:2
+sampleType:                         COUNTERSSAMPLE
+sampleSequenceNo                    6144
+sourceId                            0:1
+counterBlock_tag                    0:1
+format 0 == id ==4096 
+format 1 == id ==0 
+!!!!!!!!!!!tag == 1; tag1 = 16777216
+
+hit SFLCOUNTERS_GENERIC:
+
+<<Inside readCounters_a10_generic>>>
+uuid = 
+obj_stats_oid = 0 
+schema oid = 0
+vnp_id of ctr = 0
+Number of counters = 3
+==================== EndDatagram ======================
+
+==================== StartDatagram ====================
+
+datagramSourceIP                    50.50.50.2
+datagramSize                        137
+unixSecondsUTC                      1454543200
+datagramVersion                     5
+AgentSubId                          0
+Agent                               10.2.48.191
+PacketSequenceNo                    36869
+SysUpTime                           6206310
+samplesInPacket                     1
+==================== StartSample ======================
+sampleType_tag                      40842:3001
+skipping unknown sample: 40842:3001 len=101
+==================== EndDatagram ======================
+
+==================== StartDatagram ====================
+
+datagramSourceIP                    50.50.50.2
+datagramSize                        209
+unixSecondsUTC                      1454543200
+datagramVersion                     5
+AgentSubId                          0
+Agent                               10.2.48.191
+PacketSequenceNo                    36870
+SysUpTime                           6206310
+samplesInPacket                     1
+==================== StartSample ======================
+sampleType_tag                      40842:3001
+skipping unknown sample: 40842:3001 len=173
+==================== EndDatagram ======================
+
+==================== StartDatagram ====================
+
+datagramSourceIP                    50.50.50.2
+datagramSize                        473
+unixSecondsUTC                      1454543200
+datagramVersion                     5
+AgentSubId                          0
+Agent                               10.2.48.191
+PacketSequenceNo                    36871
+SysUpTime                           6206310
+samplesInPacket                     1
+==================== StartSample ======================
+sampleType_tag                      40842:3001
+skipping unknown sample: 40842:3001 len=437
+==================== EndDatagram ======================
+
+==================== StartDatagram ====================
+
+datagramSourceIP                    50.50.50.2
+datagramSize                        413
+unixSecondsUTC                      1454543200
+datagramVersion                     5
+AgentSubId                          0
+Agent                               10.2.48.191
+PacketSequenceNo                    36872
+SysUpTime                           6206314
+samplesInPacket                     1
+==================== StartSample ======================
+sampleType_tag                      40842:3001
+skipping unknown sample: 40842:3001 len=377
+==================== EndDatagram ======================
+
+==================== StartDatagram ====================
+
+datagramSourceIP                    50.50.50.2
+datagramSize                        260
+unixSecondsUTC                      1454543201
+datagramVersion                     5
+AgentSubId                          0
+Agent                               10.2.48.191
+PacketSequenceNo                    36873
+SysUpTime                           6206786
+samplesInPacket                     2
+==================== StartSample ======================
+sampleType_tag                      0:2
+sampleType:                         COUNTERSSAMPLE
+sampleSequenceNo                    6145
+sourceId                            1:501
+counterBlock_tag                    0:1
+format 0 == id ==4096 
+format 1 == id ==0 
+!!!!!!!!!!!tag == 1; tag1 = 16777216
+
+hit SFLCOUNTERS_GENERIC:
+
+<<Inside readCounters_a10_generic>>>
+uuid = 
+obj_stats_oid = 792320 
+schema oid = 792320
+vnp_id of ctr = 6318336
+Number of counters = 3
+==================== EndDatagram ======================
+
+==================== StartDatagram ====================
+
+datagramSourceIP                    50.50.50.2
+datagramSize                        144
+unixSecondsUTC                      1454543201
+datagramVersion                     5
+AgentSubId                          0
+Agent                               10.2.48.191
+PacketSequenceNo                    36874
+SysUpTime                           6206786
+samplesInPacket                     1
+==================== StartSample ======================
+sampleType_tag                      0:2
+sampleType:                         COUNTERSSAMPLE
+sampleSequenceNo                    6145
+sourceId                            0:1
+counterBlock_tag                    0:1
+format 0 == id ==4096 
+format 1 == id ==0 
+!!!!!!!!!!!tag == 1; tag1 = 16777216
+
+hit SFLCOUNTERS_GENERIC:
+
+<<Inside readCounters_a10_generic>>>
+uuid = 
+obj_stats_oid = 0 
+schema oid = 0
+vnp_id of ctr = 0
+Number of counters = 3
+==================== EndDatagram ======================
+
