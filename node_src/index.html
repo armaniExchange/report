@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="report" style="width: 1000px; height: 500px;"></div>
+		<script src="https://code.jquery.com/jquery-3.1.0.js"></script>
+		<script src="//code.highcharts.com/highcharts.js"></script>
+		
+		<script type="text/javascript">
+			
+
+			function addChart(series) {
+				var chart = Highcharts.chart('report', {
+					title: {
+							text: 'Solar Employment Growth by Sector, 2010-2016'
+					},
+
+					subtitle: {
+							text: 'Source: thesolarfoundation.com'
+					},
+
+					xAxis:{  
+						title: {  
+								text: '时间',  
+								style: {  
+										color: '#4572A7'  
+								}  
+						},  
+						type: 'datetime',  
+            },  
+
+					yAxis: {
+							title: {
+									text: 'Number of Employees'
+							}
+					},
+					legend: {
+							layout: 'vertical',
+							align: 'right',
+							verticalAlign: 'middle'
+					},
+					plotOptions: {
+							series: {
+								animation: false,
+									pointStart: 2010
+							}
+					},
+					series: series
+				});
+			}
+
+			function getData() {
+				$.ajax({url:"/report?category=test",
+					success: function(data) {
+						console.log(data);
+						var seriesData = {
+							1: [],
+							2: [],
+							3: [],
+							4: [],
+							5: [],
+							6: [],
+							7: [],
+							8: []
+						};
+						for (var i in data) {
+							var item = data[i];
+							var timestamp = item['timestamps'];
+							var records = item.data;
+							seriesData[1].push([timestamp, records[1]]);
+							seriesData[2].push([timestamp, records[2]]);
+							seriesData[3].push([timestamp, records[3]]);
+							seriesData[4].push([timestamp, records[4]]);
+							seriesData[5].push([timestamp, records[5]]);
+							seriesData[6].push([timestamp, records[6]]);
+							seriesData[7].push([timestamp, records[7]]);
+							seriesData[8].push([timestamp, records[8]]);
+						}
+
+						var series = [
+							{
+								name: 'Data 1',
+								data: seriesData[1]
+							},
+							{
+								name: 'Data 2',
+								data: seriesData[2]
+							},
+							{
+								name: 'Data 3',
+								data: seriesData[4]
+							},
+							{
+								name: 'Data 5',
+								data: seriesData[5]
+							},
+							{
+								name: 'Data 6',
+								data: seriesData[6]
+							},
+							{
+								name: 'Data 7',
+								data: seriesData[7]
+							},
+							{
+								name: 'Data 8',
+								data: seriesData[8]
+							}
+						];
+						console.log(series);
+						// chart.update({ series: series });
+						addChart(series);
+					}
+				});
+			}
+			getData();
+			setInterval(getData, 5000);
+			
+		</script>
+	</body>
+</html>
