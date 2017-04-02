@@ -113,7 +113,7 @@ configure:3305: gcc -c -g  conftest.c >&5
 configure:3305: $? = 0
 configure:3346: result: yes
 configure:3363: checking for gcc option to accept ISO C89
-configure:3426: gcc  -c -g -O2 -I/usr/local/include/json-c  -L/usr/local/lib -ljson-c   -lleveldb -lpthread  conftest.c >&5
+configure:3426: gcc  -c -g -O0 -I/usr/local/include/json-c  -L/usr/local/lib -ljson-c   -lleveldb -lpthread  conftest.c >&5
 configure:3426: $? = 0
 configure:3439: result: none needed
 configure:3470: checking for style of include used by make
@@ -171,51 +171,51 @@ configure:3929: result: /bin/grep
 configure:3934: checking for egrep
 configure:3996: result: /bin/grep -E
 configure:4001: checking for ANSI C header files
-configure:4021: gcc -c -g -O2 -I/usr/local/include/json-c  -L/usr/local/lib -ljson-c   -lleveldb -lpthread  conftest.c >&5
+configure:4021: gcc -c -g -O0 -I/usr/local/include/json-c  -L/usr/local/lib -ljson-c   -lleveldb -lpthread  conftest.c >&5
 configure:4021: $? = 0
-configure:4094: gcc -o conftest -g -O2 -I/usr/local/include/json-c  -L/usr/local/lib -ljson-c   -lleveldb -lpthread   conftest.c  >&5
+configure:4094: gcc -o conftest -g -O0 -I/usr/local/include/json-c  -L/usr/local/lib -ljson-c   -lleveldb -lpthread   conftest.c  >&5
 configure:4094: $? = 0
 configure:4094: ./conftest
 configure:4094: $? = 0
 configure:4105: result: yes
 configure:4118: checking for sys/types.h
-configure:4118: gcc -c -g -O2 -I/usr/local/include/json-c  -L/usr/local/lib -ljson-c   -lleveldb -lpthread  conftest.c >&5
+configure:4118: gcc -c -g -O0 -I/usr/local/include/json-c  -L/usr/local/lib -ljson-c   -lleveldb -lpthread  conftest.c >&5
 configure:4118: $? = 0
 configure:4118: result: yes
 configure:4118: checking for sys/stat.h
-configure:4118: gcc -c -g -O2 -I/usr/local/include/json-c  -L/usr/local/lib -ljson-c   -lleveldb -lpthread  conftest.c >&5
+configure:4118: gcc -c -g -O0 -I/usr/local/include/json-c  -L/usr/local/lib -ljson-c   -lleveldb -lpthread  conftest.c >&5
 configure:4118: $? = 0
 configure:4118: result: yes
 configure:4118: checking for stdlib.h
-configure:4118: gcc -c -g -O2 -I/usr/local/include/json-c  -L/usr/local/lib -ljson-c   -lleveldb -lpthread  conftest.c >&5
+configure:4118: gcc -c -g -O0 -I/usr/local/include/json-c  -L/usr/local/lib -ljson-c   -lleveldb -lpthread  conftest.c >&5
 configure:4118: $? = 0
 configure:4118: result: yes
 configure:4118: checking for string.h
-configure:4118: gcc -c -g -O2 -I/usr/local/include/json-c  -L/usr/local/lib -ljson-c   -lleveldb -lpthread  conftest.c >&5
+configure:4118: gcc -c -g -O0 -I/usr/local/include/json-c  -L/usr/local/lib -ljson-c   -lleveldb -lpthread  conftest.c >&5
 configure:4118: $? = 0
 configure:4118: result: yes
 configure:4118: checking for memory.h
-configure:4118: gcc -c -g -O2 -I/usr/local/include/json-c  -L/usr/local/lib -ljson-c   -lleveldb -lpthread  conftest.c >&5
+configure:4118: gcc -c -g -O0 -I/usr/local/include/json-c  -L/usr/local/lib -ljson-c   -lleveldb -lpthread  conftest.c >&5
 configure:4118: $? = 0
 configure:4118: result: yes
 configure:4118: checking for strings.h
-configure:4118: gcc -c -g -O2 -I/usr/local/include/json-c  -L/usr/local/lib -ljson-c   -lleveldb -lpthread  conftest.c >&5
+configure:4118: gcc -c -g -O0 -I/usr/local/include/json-c  -L/usr/local/lib -ljson-c   -lleveldb -lpthread  conftest.c >&5
 configure:4118: $? = 0
 configure:4118: result: yes
 configure:4118: checking for inttypes.h
-configure:4118: gcc -c -g -O2 -I/usr/local/include/json-c  -L/usr/local/lib -ljson-c   -lleveldb -lpthread  conftest.c >&5
+configure:4118: gcc -c -g -O0 -I/usr/local/include/json-c  -L/usr/local/lib -ljson-c   -lleveldb -lpthread  conftest.c >&5
 configure:4118: $? = 0
 configure:4118: result: yes
 configure:4118: checking for stdint.h
-configure:4118: gcc -c -g -O2 -I/usr/local/include/json-c  -L/usr/local/lib -ljson-c   -lleveldb -lpthread  conftest.c >&5
+configure:4118: gcc -c -g -O0 -I/usr/local/include/json-c  -L/usr/local/lib -ljson-c   -lleveldb -lpthread  conftest.c >&5
 configure:4118: $? = 0
 configure:4118: result: yes
 configure:4118: checking for unistd.h
-configure:4118: gcc -c -g -O2 -I/usr/local/include/json-c  -L/usr/local/lib -ljson-c   -lleveldb -lpthread  conftest.c >&5
+configure:4118: gcc -c -g -O0 -I/usr/local/include/json-c  -L/usr/local/lib -ljson-c   -lleveldb -lpthread  conftest.c >&5
 configure:4118: $? = 0
 configure:4118: result: yes
 configure:4133: checking fcntl.h usability
-configure:4133: gcc -c -g -O2 -I/usr/local/include/json-c  -L/usr/local/lib -ljson-c   -lleveldb -lpthread  conftest.c >&5
+configure:4133: gcc -c -g -O0 -I/usr/local/include/json-c  -L/usr/local/lib -ljson-c   -lleveldb -lpthread  conftest.c >&5
 configure:4133: $? = 0
 configure:4133: result: yes
 configure:4133: checking fcntl.h presence
@@ -225,7 +225,7 @@ configure:4133: result: yes
 configure:4133: checking for fcntl.h
 configure:4133: result: yes
 configure:4133: checking netdb.h usability
-configure:4133: gcc -c -g -O2 -I/usr/local/include/json-c  -L/usr/local/lib -ljson-c   -lleveldb -lpthread  conftest.c >&5
+configure:4133: gcc -c -g -O0 -I/usr/local/include/json-c  -L/usr/local/lib -ljson-c   -lleveldb -lpthread  conftest.c >&5
 configure:4133: $? = 0
 configure:4133: result: yes
 configure:4133: checking netdb.h presence
@@ -235,7 +235,7 @@ configure:4133: result: yes
 configure:4133: checking for netdb.h
 configure:4133: result: yes
 configure:4133: checking netinet/in.h usability
-configure:4133: gcc -c -g -O2 -I/usr/local/include/json-c  -L/usr/local/lib -ljson-c   -lleveldb -lpthread  conftest.c >&5
+configure:4133: gcc -c -g -O0 -I/usr/local/include/json-c  -L/usr/local/lib -ljson-c   -lleveldb -lpthread  conftest.c >&5
 configure:4133: $? = 0
 configure:4133: result: yes
 configure:4133: checking netinet/in.h presence
@@ -249,7 +249,7 @@ configure:4133: result: yes
 configure:4133: checking for string.h
 configure:4133: result: yes
 configure:4133: checking sys/socket.h usability
-configure:4133: gcc -c -g -O2 -I/usr/local/include/json-c  -L/usr/local/lib -ljson-c   -lleveldb -lpthread  conftest.c >&5
+configure:4133: gcc -c -g -O0 -I/usr/local/include/json-c  -L/usr/local/lib -ljson-c   -lleveldb -lpthread  conftest.c >&5
 configure:4133: $? = 0
 configure:4133: result: yes
 configure:4133: checking sys/socket.h presence
@@ -259,7 +259,7 @@ configure:4133: result: yes
 configure:4133: checking for sys/socket.h
 configure:4133: result: yes
 configure:4133: checking sys/time.h usability
-configure:4133: gcc -c -g -O2 -I/usr/local/include/json-c  -L/usr/local/lib -ljson-c   -lleveldb -lpthread  conftest.c >&5
+configure:4133: gcc -c -g -O0 -I/usr/local/include/json-c  -L/usr/local/lib -ljson-c   -lleveldb -lpthread  conftest.c >&5
 configure:4133: $? = 0
 configure:4133: result: yes
 configure:4133: checking sys/time.h presence
@@ -271,15 +271,15 @@ configure:4133: result: yes
 configure:4133: checking for unistd.h
 configure:4133: result: yes
 configure:4145: checking for an ANSI C-conforming const
-configure:4211: gcc -c -g -O2 -I/usr/local/include/json-c  -L/usr/local/lib -ljson-c   -lleveldb -lpthread  conftest.c >&5
+configure:4211: gcc -c -g -O0 -I/usr/local/include/json-c  -L/usr/local/lib -ljson-c   -lleveldb -lpthread  conftest.c >&5
 configure:4211: $? = 0
 configure:4218: result: yes
 configure:4226: checking whether time.h and sys/time.h may both be included
-configure:4246: gcc -c -g -O2 -I/usr/local/include/json-c  -L/usr/local/lib -ljson-c   -lleveldb -lpthread  conftest.c >&5
+configure:4246: gcc -c -g -O0 -I/usr/local/include/json-c  -L/usr/local/lib -ljson-c   -lleveldb -lpthread  conftest.c >&5
 configure:4246: $? = 0
 configure:4253: result: yes
 configure:4266: checking sys/select.h usability
-configure:4266: gcc -c -g -O2 -I/usr/local/include/json-c  -L/usr/local/lib -ljson-c   -lleveldb -lpthread  conftest.c >&5
+configure:4266: gcc -c -g -O0 -I/usr/local/include/json-c  -L/usr/local/lib -ljson-c   -lleveldb -lpthread  conftest.c >&5
 configure:4266: $? = 0
 configure:4266: result: yes
 configure:4266: checking sys/select.h presence
@@ -291,27 +291,27 @@ configure:4266: result: yes
 configure:4266: checking for sys/socket.h
 configure:4266: result: yes
 configure:4276: checking types of arguments for select
-configure:4304: gcc -c -g -O2 -I/usr/local/include/json-c  -L/usr/local/lib -ljson-c   -lleveldb -lpthread  conftest.c >&5
+configure:4304: gcc -c -g -O0 -I/usr/local/include/json-c  -L/usr/local/lib -ljson-c   -lleveldb -lpthread  conftest.c >&5
 configure:4304: $? = 0
 configure:4315: result: int,fd_set *,struct timeval *
 configure:4340: checking for strftime
-configure:4340: gcc -o conftest -g -O2 -I/usr/local/include/json-c  -L/usr/local/lib -ljson-c   -lleveldb -lpthread   conftest.c  >&5
+configure:4340: gcc -o conftest -g -O0 -I/usr/local/include/json-c  -L/usr/local/lib -ljson-c   -lleveldb -lpthread   conftest.c  >&5
 conftest.c:58:6: warning: conflicting types for built-in function 'strftime' [enabled by default]
  char strftime ();
       ^
 configure:4340: $? = 0
 configure:4340: result: yes
 configure:4395: checking for vprintf
-configure:4395: gcc -o conftest -g -O2 -I/usr/local/include/json-c  -L/usr/local/lib -ljson-c   -lleveldb -lpthread   conftest.c  >&5
+configure:4395: gcc -o conftest -g -O0 -I/usr/local/include/json-c  -L/usr/local/lib -ljson-c   -lleveldb -lpthread   conftest.c  >&5
 conftest.c:59:6: warning: conflicting types for built-in function 'vprintf' [enabled by default]
  char vprintf ();
       ^
 configure:4395: $? = 0
 configure:4395: result: yes
 configure:4401: checking for _doprnt
-configure:4401: gcc -o conftest -g -O2 -I/usr/local/include/json-c  -L/usr/local/lib -ljson-c   -lleveldb -lpthread   conftest.c  >&5
-/tmp/cc2n5eNa.o: In function `main':
-/home/admin/sflow_411/conftest.c:71: undefined reference to `_doprnt'
+configure:4401: gcc -o conftest -g -O0 -I/usr/local/include/json-c  -L/usr/local/lib -ljson-c   -lleveldb -lpthread   conftest.c  >&5
+/tmp/cc1Z1vVl.o: In function `main':
+/home/admin/report/conftest.c:71: undefined reference to `_doprnt'
 collect2: error: ld returned 1 exit status
 configure:4401: $? = 1
 configure: failed program was:
@@ -391,44 +391,44 @@ configure: failed program was:
 | }
 configure:4401: result: no
 configure:4415: checking for gethostbyname
-configure:4415: gcc -o conftest -g -O2 -I/usr/local/include/json-c  -L/usr/local/lib -ljson-c   -lleveldb -lpthread   conftest.c  >&5
+configure:4415: gcc -o conftest -g -O0 -I/usr/local/include/json-c  -L/usr/local/lib -ljson-c   -lleveldb -lpthread   conftest.c  >&5
 configure:4415: $? = 0
 configure:4415: result: yes
 configure:4415: checking for memset
-configure:4415: gcc -o conftest -g -O2 -I/usr/local/include/json-c  -L/usr/local/lib -ljson-c   -lleveldb -lpthread   conftest.c  >&5
+configure:4415: gcc -o conftest -g -O0 -I/usr/local/include/json-c  -L/usr/local/lib -ljson-c   -lleveldb -lpthread   conftest.c  >&5
 conftest.c:61:6: warning: conflicting types for built-in function 'memset' [enabled by default]
  char memset ();
       ^
 configure:4415: $? = 0
 configure:4415: result: yes
 configure:4415: checking for select
-configure:4415: gcc -o conftest -g -O2 -I/usr/local/include/json-c  -L/usr/local/lib -ljson-c   -lleveldb -lpthread   conftest.c  >&5
+configure:4415: gcc -o conftest -g -O0 -I/usr/local/include/json-c  -L/usr/local/lib -ljson-c   -lleveldb -lpthread   conftest.c  >&5
 configure:4415: $? = 0
 configure:4415: result: yes
 configure:4415: checking for socket
-configure:4415: gcc -o conftest -g -O2 -I/usr/local/include/json-c  -L/usr/local/lib -ljson-c   -lleveldb -lpthread   conftest.c  >&5
+configure:4415: gcc -o conftest -g -O0 -I/usr/local/include/json-c  -L/usr/local/lib -ljson-c   -lleveldb -lpthread   conftest.c  >&5
 configure:4415: $? = 0
 configure:4415: result: yes
 configure:4415: checking for strdup
-configure:4415: gcc -o conftest -g -O2 -I/usr/local/include/json-c  -L/usr/local/lib -ljson-c   -lleveldb -lpthread   conftest.c  >&5
+configure:4415: gcc -o conftest -g -O0 -I/usr/local/include/json-c  -L/usr/local/lib -ljson-c   -lleveldb -lpthread   conftest.c  >&5
 conftest.c:64:6: warning: conflicting types for built-in function 'strdup' [enabled by default]
  char strdup ();
       ^
 configure:4415: $? = 0
 configure:4415: result: yes
 configure:4415: checking for strerror
-configure:4415: gcc -o conftest -g -O2 -I/usr/local/include/json-c  -L/usr/local/lib -ljson-c   -lleveldb -lpthread   conftest.c  >&5
+configure:4415: gcc -o conftest -g -O0 -I/usr/local/include/json-c  -L/usr/local/lib -ljson-c   -lleveldb -lpthread   conftest.c  >&5
 configure:4415: $? = 0
 configure:4415: result: yes
 configure:4415: checking for strspn
-configure:4415: gcc -o conftest -g -O2 -I/usr/local/include/json-c  -L/usr/local/lib -ljson-c   -lleveldb -lpthread   conftest.c  >&5
+configure:4415: gcc -o conftest -g -O0 -I/usr/local/include/json-c  -L/usr/local/lib -ljson-c   -lleveldb -lpthread   conftest.c  >&5
 conftest.c:66:6: warning: conflicting types for built-in function 'strspn' [enabled by default]
  char strspn ();
       ^
 configure:4415: $? = 0
 configure:4415: result: yes
 configure:4415: checking for strtol
-configure:4415: gcc -o conftest -g -O2 -I/usr/local/include/json-c  -L/usr/local/lib -ljson-c   -lleveldb -lpthread   conftest.c  >&5
+configure:4415: gcc -o conftest -g -O0 -I/usr/local/include/json-c  -L/usr/local/lib -ljson-c   -lleveldb -lpthread   conftest.c  >&5
 configure:4415: $? = 0
 configure:4415: result: yes
 configure:4536: checking that generated files are newer than configure
@@ -528,18 +528,18 @@ am_cv_CC_dependencies_compiler_type=gcc3
 ## Output variables. ##
 ## ----------------- ##
 
-ACLOCAL='${SHELL} /home/admin/sflow_411/missing --run aclocal-1.12'
+ACLOCAL='${SHELL} /home/admin/report/missing --run aclocal-1.12'
 AMDEPBACKSLASH='\'
 AMDEP_FALSE='#'
 AMDEP_TRUE=''
 AMTAR='$${TAR-tar}'
-AUTOCONF='${SHELL} /home/admin/sflow_411/missing --run autoconf'
-AUTOHEADER='${SHELL} /home/admin/sflow_411/missing --run autoheader'
-AUTOMAKE='${SHELL} /home/admin/sflow_411/missing --run automake-1.12'
+AUTOCONF='${SHELL} /home/admin/report/missing --run autoconf'
+AUTOHEADER='${SHELL} /home/admin/report/missing --run autoheader'
+AUTOMAKE='${SHELL} /home/admin/report/missing --run automake-1.12'
 AWK='mawk'
 CC='gcc'
 CCDEPMODE='depmode=gcc3'
-CFLAGS='-g -O2 -I/usr/local/include/json-c  -L/usr/local/lib -ljson-c   -lleveldb -lpthread'
+CFLAGS='-g -O0 -I/usr/local/include/json-c  -L/usr/local/lib -ljson-c   -lleveldb -lpthread'
 CPP='gcc -E'
 CPPFLAGS=''
 CYGPATH_W='echo'
@@ -559,7 +559,7 @@ LDFLAGS=''
 LIBOBJS=''
 LIBS=''
 LTLIBOBJS=''
-MAKEINFO='${SHELL} /home/admin/sflow_411/missing --run makeinfo'
+MAKEINFO='${SHELL} /home/admin/report/missing --run makeinfo'
 MKDIR_P='/bin/mkdir -p'
 OBJEXT='o'
 PACKAGE='sflowtool'
@@ -605,7 +605,7 @@ host_vendor='unknown'
 htmldir='${docdir}'
 includedir='${prefix}/include'
 infodir='${datarootdir}/info'
-install_sh='${SHELL} /home/admin/sflow_411/install-sh'
+install_sh='${SHELL} /home/admin/report/install-sh'
 libdir='${exec_prefix}/lib'
 libexecdir='${exec_prefix}/libexec'
 localedir='${datarootdir}/locale'

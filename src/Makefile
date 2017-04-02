@@ -74,7 +74,7 @@ am__mv = mv -f
 COMPILE = $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) \
 	$(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
 CCLD = $(CC)
-LINK = $(CCLD) $(AM_CFLAGS) $(AM_LDFLAGS) $(LDFLAGS) -o $@
+LINK = $(CCLD) $(AM_CFLAGS) $(CFLAGS) $(AM_LDFLAGS) $(LDFLAGS) -o $@
 SOURCES = $(sflowtool_SOURCES)
 DIST_SOURCES = $(sflowtool_SOURCES)
 am__can_run_installinfo = \
@@ -85,15 +85,15 @@ am__can_run_installinfo = \
 ETAGS = etags
 CTAGS = ctags
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
-ACLOCAL = ${SHELL} /home/admin/sflow_411/missing --run aclocal-1.12
+ACLOCAL = ${SHELL} /home/admin/report/missing --run aclocal-1.12
 AMTAR = $${TAR-tar}
-AUTOCONF = ${SHELL} /home/admin/sflow_411/missing --run autoconf
-AUTOHEADER = ${SHELL} /home/admin/sflow_411/missing --run autoheader
-AUTOMAKE = ${SHELL} /home/admin/sflow_411/missing --run automake-1.12
+AUTOCONF = ${SHELL} /home/admin/report/missing --run autoconf
+AUTOHEADER = ${SHELL} /home/admin/report/missing --run autoheader
+AUTOMAKE = ${SHELL} /home/admin/report/missing --run automake-1.12
 AWK = mawk
 CC = gcc
 CCDEPMODE = depmode=gcc3
-CFLAGS = -g -O2 -I/usr/local/include/json-c  -L/usr/local/lib -ljson-c   -lleveldb -lpthread
+CFLAGS = -g -O0 -I/usr/local/include/json-c  -L/usr/local/lib -ljson-c   -lleveldb -lpthread
 CPP = gcc -E
 CPPFLAGS = 
 CYGPATH_W = echo
@@ -114,7 +114,7 @@ LDFLAGS =
 LIBOBJS = 
 LIBS = 
 LTLIBOBJS = 
-MAKEINFO = ${SHELL} /home/admin/sflow_411/missing --run makeinfo
+MAKEINFO = ${SHELL} /home/admin/report/missing --run makeinfo
 MKDIR_P = /bin/mkdir -p
 OBJEXT = o
 PACKAGE = sflowtool
@@ -129,10 +129,10 @@ SET_MAKE =
 SHELL = /bin/bash
 STRIP = 
 VERSION = 3.30
-abs_builddir = /home/admin/sflow_411/src
-abs_srcdir = /home/admin/sflow_411/src
-abs_top_builddir = /home/admin/sflow_411
-abs_top_srcdir = /home/admin/sflow_411
+abs_builddir = /home/admin/report/src
+abs_srcdir = /home/admin/report/src
+abs_top_builddir = /home/admin/report
+abs_top_srcdir = /home/admin/report
 ac_ct_CC = gcc
 am__include = include
 am__leading_dot = .
@@ -159,7 +159,7 @@ host_vendor = unknown
 htmldir = ${docdir}
 includedir = ${prefix}/include
 infodir = ${datarootdir}/info
-install_sh = ${SHELL} /home/admin/sflow_411/install-sh
+install_sh = ${SHELL} /home/admin/report/install-sh
 libdir = ${exec_prefix}/lib
 libexecdir = ${exec_prefix}/libexec
 localedir = ${datarootdir}/locale
@@ -256,7 +256,7 @@ clean-binPROGRAMS:
 	-test -z "$(bin_PROGRAMS)" || rm -f $(bin_PROGRAMS)
 sflowtool$(EXEEXT): $(sflowtool_OBJECTS) $(sflowtool_DEPENDENCIES) $(EXTRA_sflowtool_DEPENDENCIES) 
 	@rm -f sflowtool$(EXEEXT)
-	$(LINK) $(sflowtool_OBJECTS) $(CFLAGS) $(sflowtool_LDADD) $(LIBS)
+	$(LINK) $(sflowtool_OBJECTS) $(sflowtool_LDADD) $(LIBS)
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)
