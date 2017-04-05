@@ -3349,13 +3349,13 @@ if test "$ac_test_CFLAGS" = set; then
   CFLAGS=$ac_save_CFLAGS
 elif test $ac_cv_prog_cc_g = yes; then
   if test "$GCC" = yes; then
-    CFLAGS="-g -O0 `pkg-config --cflags json-c --libs json-c` -lleveldb -lpthread"
+    CFLAGS="-g -O0 `pkg-config --cflags json-c --libs json-c` -lleveldb"
   else
     CFLAGS="-g"
   fi
 else
   if test "$GCC" = yes; then
-    CFLAGS="-g -O0 `pkg-config --cflags json-c --libs json-c` -lleveldb -lpthread"
+    CFLAGS="-g -O0 `pkg-config --cflags json-c --libs json-c` -lleveldb"
   else
     CFLAGS=
   fi
@@ -3724,7 +3724,6 @@ case $host_os in *\ *) host_os=`echo "$host_os" | sed 's/ /-/g'`;; esac
 case "$host" in
 *-*-solaris*)
 	LDFLAGS="$LDFLAGS -lsocket -lnsl"
-    LDFLAGS+= $(shell pkg-config --libs json-c)
 	;;
 esac
 
@@ -4525,7 +4524,7 @@ for ac_i in : $LIBOBJS; do test "x$ac_i" = x: && continue
   ac_i=`$as_echo "$ac_i" | sed "$ac_script"`
   # 2. Prepend LIBOBJDIR.  When used with automake>=1.10 LIBOBJDIR
   #    will be set to the directory where LIBOBJS objects are built.
-  as_fn_append ac_libobjs " U.$ac_objext \${LIBOBJDIR}$ac_i\$"
+  as_fn_append ac_libobjs " \${LIBOBJDIR}$ac_i\$U.$ac_objext"
   as_fn_append ac_ltlibobjs " \${LIBOBJDIR}$ac_i"'$U.lo'
 done
 LIBOBJS=$ac_libobjs
@@ -5878,3 +5877,4 @@ if test -n "$ac_unrecognized_opts" && test "$enable_option_checking" != no; then
   { $as_echo "$as_me:${as_lineno-$LINENO}: WARNING: unrecognized options: $ac_unrecognized_opts" >&5
 $as_echo "$as_me: WARNING: unrecognized options: $ac_unrecognized_opts" >&2;}
 fi
+
