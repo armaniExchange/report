@@ -1,14 +1,19 @@
-import levelup from 'levelup';
+// import levelup from 'levelup';
+import config from '../config';
+import level from 'level-party';
 
 
 class KnowLevel {
 
-  constructor(levelName) {
-    this.levelName = levelName;
+  constructor(name) {
+    this.name = name;
   }
 
   getDB() {
-    return levelup(__dirname + `/${this.levelName}`);
+    const options = {
+      valueEncoding: 'json'
+    };
+    return level(config.dbPath + `/${this.name}`, options);
   }
 
   saveRecord(key, value, callback) {
@@ -45,21 +50,29 @@ class KnowLevel {
     } catch(e) {
       console.log(e);
     }
-    
   }
 
-  find(options, callback) {
+  find(options, callback, filter) {
     try {
       var records = [];
       var db = this.getDB();
       db.createReadStream(options)
         .on('data', (data) => {
           const key = data.key;
-          records.push({
-            timestamps: parseInt(key.substring(key.lastIndexOf('.') + 1)),
-            data: JSON.parse(data.value)
-          });
-          // records.push(JSON.parse(data.value));
+          const keys = key.split('.');
+          if (keys.length === 5) {
+            const timestamp = parseInt(keys[3]);
+            const value = JSON.parse(data.value);
+            if (filter && typeof(filter) === 'function') {
+              filter(keys[4], value);
+            }
+
+            records.push({
+              timestamp: timestamp,
+              data: value
+            });
+          }
+          
         })
         .on('end', () => {
           db.close();
@@ -71,6 +84,15 @@ class KnowLevel {
     } catch(e) {
       console.log(e);
     }
+  }
+
+  batch(options, callback) {
+    const db = this.getDB();
+    db.batch(options, (err) => {
+      if (err) {
+        console.log('Ooops!', err)
+      }
+    });
   }
 }
 

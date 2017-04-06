@@ -3,25 +3,43 @@
 	<head>
 		<meta charset="UTF-8">
 		<title></title>
+		<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 	</head>
 	<body>
-		<div id="report" style="width: 1000px; height: 500px;"></div>
+		<div class="container">
+			<div style="margin-top: 30px;">
+				<select class="form-control" id="db" value="basic" style="width: 200px; float: left">
+					<option value="basic">Basic</option>
+					<option value="30m">30M</option>
+					<option value="1h">1H</option>
+					<option value="7h">7H</option>
+					<option value="1d">1D</option>
+					<option value="7d">7D</option>
+					<option value="30d">30D</option>
+				</select>
+
+				<select class="form-control" id="support" style="width: 200px; float: left; margin-left: 20px;">
+					<option value=""></option>
+					<option value="total_connection">total_connection</option>
+					<option value="avg_connection">avg_connection</option>
+				</select>
+
+				<button class="btn btn-success" onclick="getTotalData()" style="margin-left: 20px;">Submit</button>
+			</div>
+			<div id="total_report" style="width: 1000px; height: 500px;"></div>
+			<!--<div id="average_report" style="width: 1000px; height: 500px;"></div>-->
+  	</div>
 		<script src="https://code.jquery.com/jquery-3.1.0.js"></script>
-		<script src="//code.highcharts.com/highcharts.js"></script>
+		<script src="http://code.highcharts.com/highcharts.js"></script>
+		<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 		
 		<script type="text/javascript">
 			
-
-			function addChart(series) {
-				var chart = Highcharts.chart('report', {
+			function addChart(id, title, series) {
+				var chart = Highcharts.chart(id, {
 					title: {
-							text: 'Solar Employment Growth by Sector, 2010-2016'
+							text: title
 					},
-
-					subtitle: {
-							text: 'Source: thesolarfoundation.com'
-					},
-
 					xAxis:{  
 						title: {  
 								text: '时间',  
@@ -29,9 +47,8 @@
 										color: '#4572A7'  
 								}  
 						},  
-						type: 'datetime',  
-            },  
-
+						type: 'datetime'
+          },  
 					yAxis: {
 							title: {
 									text: 'Number of Employees'
@@ -52,72 +69,112 @@
 				});
 			}
 
-			function getData() {
-				$.ajax({url:"/report?category=test",
+			function getTotalData() {
+				var db = $('#db').val();
+				var support = $('#support').val();
+				var url = '/report?db=' + db;
+				if (support) {
+					url += '&' + support + '=true';
+				}
+				$.ajax({url: url,
 					success: function(data) {
 						console.log(data);
 						var seriesData = {
-							1: [],
-							2: [],
-							3: [],
-							4: [],
-							5: [],
-							6: [],
-							7: [],
-							8: []
+							ov_new_conn_l7: [],
+							ov_new_conn_l4: [],
+							ov_new_conn_ssl: [],
+							ov_new_conn_ipnat: [],
+							total_connection: []
 						};
 						for (var i in data) {
 							var item = data[i];
-							var timestamp = item['timestamps'];
+							var timestamp = item['timestamp'];
 							var records = item.data;
-							seriesData[1].push([timestamp, records[1]]);
-							seriesData[2].push([timestamp, records[2]]);
-							seriesData[3].push([timestamp, records[3]]);
-							seriesData[4].push([timestamp, records[4]]);
-							seriesData[5].push([timestamp, records[5]]);
-							seriesData[6].push([timestamp, records[6]]);
-							seriesData[7].push([timestamp, records[7]]);
-							seriesData[8].push([timestamp, records[8]]);
+							seriesData['ov_new_conn_l7'].push([timestamp, records['ov_new_conn_l7']]);
+							seriesData['ov_new_conn_l4'].push([timestamp, records['ov_new_conn_l4']]);
+							seriesData['ov_new_conn_ssl'].push([timestamp, records['ov_new_conn_ssl']]);
+							seriesData['ov_new_conn_ipnat'].push([timestamp, records['ov_new_conn_ipnat']]);
+							seriesData['total_connection'].push([timestamp, records['total_connection']]);
 						}
 
 						var series = [
 							{
-								name: 'Data 1',
-								data: seriesData[1]
+								name: 'L7',
+								data: seriesData['ov_new_conn_l7']
 							},
 							{
-								name: 'Data 2',
-								data: seriesData[2]
+								name: 'L4',
+								data: seriesData['ov_new_conn_l4']
 							},
 							{
-								name: 'Data 3',
-								data: seriesData[4]
+								name: 'SSL',
+								data: seriesData['ov_new_conn_ssl']
 							},
 							{
-								name: 'Data 5',
-								data: seriesData[5]
+								name: 'IP NAT',
+								data: seriesData['ov_new_conn_ipnat']
 							},
 							{
-								name: 'Data 6',
-								data: seriesData[6]
-							},
-							{
-								name: 'Data 7',
-								data: seriesData[7]
-							},
-							{
-								name: 'Data 8',
-								data: seriesData[8]
+								name: 'Total',
+								data: seriesData['total_connection']
 							}
 						];
-						console.log(series);
-						// chart.update({ series: series });
-						addChart(series);
+						addChart('total_report', 'New connections', series);
 					}
 				});
 			}
-			getData();
-			setInterval(getData, 5000);
+
+			function getAverageData() {
+				$.ajax({url:"/report?category=test&avg_connection=true",
+					success: function(data) {
+						console.log(data);
+						var seriesData = {
+							ov_new_conn_l7: [],
+							ov_new_conn_l4: [],
+							ov_new_conn_ssl: [],
+							ov_new_conn_ipnat: [],
+							avg_connection: []
+						};
+						for (var i in data) {
+							var item = data[i];
+							var timestamp = item['timestamp'];
+							var records = item.data;
+							seriesData['ov_new_conn_l7'].push([timestamp, records['ov_new_conn_l7']]);
+							seriesData['ov_new_conn_l4'].push([timestamp, records['ov_new_conn_l4']]);
+							seriesData['ov_new_conn_ssl'].push([timestamp, records['ov_new_conn_ssl']]);
+							seriesData['ov_new_conn_ipnat'].push([timestamp, records['ov_new_conn_ipnat']]);
+							seriesData['avg_connection'].push([timestamp, records['avg_connection']]);
+						}
+
+						var series = [
+							{
+								name: 'L7',
+								data: seriesData['ov_new_conn_l7']
+							},
+							{
+								name: 'L4',
+								data: seriesData['ov_new_conn_l4']
+							},
+							{
+								name: 'SSL',
+								data: seriesData['ov_new_conn_ssl']
+							},
+							{
+								name: 'IP NAT',
+								data: seriesData['ov_new_conn_ipnat']
+							},
+							{
+								name: 'Average',
+								data: seriesData['avg_connection']
+							}
+						];
+						addChart('average_report', 'New connections', series);
+					}
+				});
+			}
+			getTotalData();
+			// getAverageData();
+			// setInterval(getData, 5000);
 			
 		</script>
 	</body>

@@ -1,23 +1,22 @@
 
 import express from 'express';
 
-import KnowLevel from './knowLevel';
-import Report from './report';
-import Faker from './faker';
+import KnowLevel from './src/knowLevel';
+import ReportApi from './src/reportApi';
 
 
 const app = express();
 
-const report = new Report()
+const reportApi = new ReportApi()
 
 app.get('/report', function(req, res) {
 
-  const category = req.query.category;
-  const startime = req.query['start-time'];
-  const endtime = req.query['end-time'];
-  console.log('Request Params:', category, startime, endtime);
+  // const category = req.query.category;
+  // const startime = req.query['start-time'];
+  // const endtime = req.query['end-time'];
+  console.log('Request Params:', req.query);
 
-  report.find(category, startime, endtime, function(records) {
+  reportApi.find(req.query, function(records) {
     res.send(records);
   });
   
