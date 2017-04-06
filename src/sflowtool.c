@@ -3374,33 +3374,14 @@ static void readCounters_a10_4_1_n_generic(SFSample *sample)
         char tmp[200];
         sprintf(tmp, "%d", ntohl(kv[i].key));
         json_object_object_add(data, tmp, json_object_new_int64(ntohll(kv[i].value)));
-        //json_object_object_add(data, json_object_new_string("1"), json_object_new_int(1));
         printf("key = %d value  = %ld\n", ntohl(kv[i].key), ntohll(kv[i].value));
     }
 
-    //char s2[200];//levelDB, key
-    //sprintf(s2, "%d", obj_stats_oid);
     char buff[20];
     time_t now = time(NULL);
-    //printf("%d\n", now);
-    //sprintf(buff, "%d", now);
-    //strftime(buff, 20, "%Y-%m-%d %H:%M:%S", localtime(&now));
-    //int sl = strlen(a10_custom->uuid)+10+sizeof(obj_stats_oid);
     char key[100] = "", obj_key[100]= ""; 
-    //in real code you would check for errors in malloc here
-    //strcpy(key, s1);
-    //strcat(key, s2); //concat with oid.
-    //strcat(key, ".");
-    //strcat(key, a10_custom->uuid);  //concat with uid.
-    //strcat(key, ".");
-    //strcat(key, buff);    //concat with timestamp.
     sprintf(obj_key, ".obj.%d.%s", obj_stats_oid, a10_custom->uuid ); 
-    sprintf(key, ".time.%d.%s.%lu", obj_stats_oid, a10_custom->uuid, now); 
-    //root = json_object_new_object();
-    //json_object_object_add(root, "key", json_object_new_string(key));
-    //json_object_object_add(root, "value", data);
-    //printf("json value = %s\n", json_object_to_json_string(data));
-    //ret = leveldb_simple_connect(tsdb_buff);
+    sprintf(key, ".rpt.%s.%lu.%d", a10_custom->uuid, now, obj_stats_oid);
     skipBytes(sample, sample->current_context_length);
     /*Write into levelDB*/
     char raw_data_db[] = RAW_DB;
@@ -3410,9 +3391,7 @@ static void readCounters_a10_4_1_n_generic(SFSample *sample)
     /*Read from levelDB*/
     printf("Test for key = %s\n", key);
     leveldb_simple_read_data(key, raw_data_db);
-    //leveldb_simple_read_data(".time", );
     json_object_put(data);
-    //json_object_put(root);
 }
 
 /*_________________---------------------------__________________
