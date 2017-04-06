@@ -1,5 +1,6 @@
 const config = {
   dbPath: 'D:/dev/Project/use-level/db',
+  objDB: 'obj_db',
   rawDB: 'record',
   reducedDB: {
     '30m': {

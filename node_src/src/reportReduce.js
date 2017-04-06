@@ -7,17 +7,32 @@ class ReportReduce {
 
   constructor() {
     this.fixedValue = 2;
+    this.objects = [];
     this.knowLevels = {};
     this.initKnowLevel();
   }
 
   initKnowLevel() {
-    console.log(config.rawDB);
+    this.knowLevels['obj'] = new KnowLevel(config.objDB, 'obj');
     this.knowLevels['basic'] = new KnowLevel(config.rawDB);
     
     _.forEach(config.reducedDB, (value, key) => {
       this.knowLevels[key] = new KnowLevel(value.name);
     });
+  }
+  
+  initObject(callback) {
+    if (!(callback && typeof(callback) === 'function')) {
+      return;
+    }
+    const self = this;
+    const knowLevel = self.getKnowLevel('obj');
+    knowLevel.find({
+      keys: true,
+      values: true
+    }, (objects) => {
+      callback(objects);
+    });;
   }
 
   getKnowLevel(name) {
@@ -86,7 +101,19 @@ class ReportReduce {
     knowLevel.find(options, callback);
   }
 
-  reduce(oid, uuid) {
+  reduce() {
+    const self = this;
+    self.initObject((objects) => {
+      _.forEach(objects, (obj) => {
+        // console.log(obj.oid, obj.uuid);
+        self.start(obj.oid, obj.uuid);
+      });
+    });
+
+    
+  }
+
+  start(oid, uuid) {
     const self = this;
     _.forEach(config.reducedDB, (options, key) => {
       const knowLevel = self.getKnowLevel(key);
@@ -98,12 +125,12 @@ class ReportReduce {
         }
         const fromKnowLevel = self.getKnowLevel(options.fromDB);
         const limit = Math.round(options.duration / (_.get(config.reducedDB, [options.fromDB, 'duration']) || 3));
-        self.start(fromKnowLevel, knowLevel, oid, uuid, startime, limit);
+        self.startReduce(fromKnowLevel, knowLevel, oid, uuid, startime, limit);
       });
     });
   }
 
-  start(fromKnowLevel, toKnowLevel, oid, uuid, startime, limit) {
+  startReduce(fromKnowLevel, toKnowLevel, oid, uuid, startime, limit) {
     const self = this;
     self.getAvailableData(fromKnowLevel, oid, uuid, startime, limit, (data) => {
       // If data length is limit, add new record.
@@ -112,7 +139,7 @@ class ReportReduce {
         const lastRecordTime = data[data.length - 1].timestamp;
         self.saveNewRecord(oid, uuid, toKnowLevel, data, () => {
           // const newStartime = data[dataLength - 1].timestamp;
-          self.start(fromKnowLevel, toKnowLevel, oid, uuid, lastRecordTime, limit);
+          self.startReduce(fromKnowLevel, toKnowLevel, oid, uuid, lastRecordTime, limit);
         });
       } else {
         // Haven't point.

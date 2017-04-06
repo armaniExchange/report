@@ -5,15 +5,17 @@ import level from 'level-party';
 
 class KnowLevel {
 
-  constructor(name) {
+  constructor(name, type) {
     this.name = name;
+    this.type = type || 'report';
   }
 
   getDB() {
     const options = {
-      valueEncoding: 'json'
+      valueEncoding: 'json',
+      cacheSize: 20 * 1024 * 1024
     };
-    return level(config.dbPath + `/${this.name}`, options);
+    return level(`${config.dbPath}/${this.name}`, options);
   }
 
   saveRecord(key, value, callback) {
@@ -53,25 +55,33 @@ class KnowLevel {
   }
 
   find(options, callback, filter) {
+    const self = this;
     try {
-      var records = [];
-      var db = this.getDB();
+      let records = [];
+      const db = self.getDB();
       db.createReadStream(options)
         .on('data', (data) => {
           const key = data.key;
-          const keys = key.split('.');
-          if (keys.length === 5) {
-            const timestamp = parseInt(keys[3]);
-            const value = JSON.parse(data.value);
-            if (filter && typeof(filter) === 'function') {
-              filter(keys[4], value);
-            }
-
-            records.push({
-              timestamp: timestamp,
-              data: value
-            });
+          let value = data.value;
+          if (typeof(value) === 'string') {
+            value = JSON.parse(value);
           }
+          if (self.type === 'report') {
+            const keys = key.split('.');
+            if (keys.length === 5) {
+              const timestamp = parseInt(keys[3]);
+              if (filter && typeof(filter) === 'function') {
+                filter(keys[4], value);
+              }
+              records.push({
+                timestamp: timestamp,
+                data: value
+              });
+            }
+          } else {
+            records.push(value);
+          }
+          
           
         })
         .on('end', () => {
