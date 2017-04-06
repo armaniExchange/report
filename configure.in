@@ -13,6 +13,8 @@ AC_CONFIG_SRCDIR([src/sflow.h])
 AC_PROG_CC
 
 # Checks for libraries.
+AC_CHECK_LIB(['leveldb'], ['json-c'])
+CFLAGS="$CFLAGS -g -O0 `pkg-config --cflags json-c --libs json-c` -lleveldb"
 
 AC_CANONICAL_HOST
 case "$host" in
