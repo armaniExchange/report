@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	</head>
+	<body>
+		<div class="container">
+			<div style="margin-top: 30px;">
+				<select class="form-control" id="uuids" value="basic" style="width: 200px; float: left;">
+				</select>
+				<select class="form-control" id="db" value="basic" style="width: 200px; float: left; margin-left: 20px;">
+					<option value="basic">Basic</option>
+					<option value="30m">30M</option>
+					<option value="1h">1H</option>
+					<option value="7h">7H</option>
+					<option value="1d">1D</option>
+					<option value="7d">7D</option>
+					<option value="30d">30D</option>
+				</select>
+
+				<select class="form-control" id="support" style="width: 200px; float: left; margin-left: 20px;">
+					<option value=""></option>
+					<option value="total_connection">total_connection</option>
+					<option value="avg_connection">avg_connection</option>
+				</select>
+
+				<button class="btn btn-success" id="getMore" style="margin-left: 20px;">Submit</button>
+			</div>
+			<div id="total_report" style="width: 1000px; height: 500px;"></div>
+			<!--<div id="average_report" style="width: 1000px; height: 500px;"></div>-->
+  	</div>
+		<script src="https://code.jquery.com/jquery-3.1.0.js"></script>
+		<script src="http://code.highcharts.com/highcharts.js"></script>
+		<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+		
+		<script type="text/javascript">
+
+			$(document).ready(function(){
+
+			function initObject() {
+				$.ajax({url: '/obj', success: function(data) {
+					console.log(data);
+					for (var i in data) {
+						var val = data[i];
+						$('#uuids').append('<option value="' + val.uuid + '">' + val.uuid + '</options>');
+					}
+					getTotalData();
+				}});
+			}
+			
+			function addChart(id, title, series) {
+				var chart = Highcharts.chart(id, {
+					title: {
+							text: title
+					},
+					xAxis:{  
+						title: {  
+								text: '时间',  
+								style: {  
+										color: '#4572A7'  
+								}  
+						},  
+						type: 'datetime'
+          },  
+					yAxis: {
+							title: {
+									text: 'Number of Employees'
+							}
+					},
+					legend: {
+							layout: 'vertical',
+							align: 'right',
+							verticalAlign: 'middle'
+					},
+					plotOptions: {
+							series: {
+								animation: false,
+									pointStart: 2010
+							}
+					},
+					series: series
+				});
+			}
+
+			function getTotalData() {
+				var uuid = $('#uuids').val();
+				var db = $('#db').val();
+				var support = $('#support').val();
+				var url = '/report?db=' + db + '&uuid=' + uuid;
+				if (support) {
+					url += '&' + support + '=true';
+				}
+				console.log(url);
+				$.ajax({url: url,
+					success: function(data) {
+						var seriesData = {
+						};
+
+						for (var i in data) {
+							var item = data[i];
+							var timestamp = item['timestamp'];
+							var records = item.data;
+							for (var index in records) {
+								var seriesd = seriesData[index];
+								if (!seriesd) {
+									seriesd = [];
+								}
+								seriesd.push([timestamp, records[index]]);
+								seriesData[index] = seriesd;
+							}
+						}
+
+						var series = [];
+						for (var index in seriesData) {
+							series.push({name: index, data: seriesData[index]});
+						}
+
+						// var series = [
+						// 	{
+						// 		name: 'L7',
+						// 		data: seriesData['ov_new_conn_l7']
+						// 	},
+						// 	{
+						// 		name: 'L4',
+						// 		data: seriesData['ov_new_conn_l4']
+						// 	},
+						// 	{
+						// 		name: 'SSL',
+						// 		data: seriesData['ov_new_conn_ssl']
+						// 	},
+						// 	{
+						// 		name: 'IP NAT',
+						// 		data: seriesData['ov_new_conn_ipnat']
+						// 	},
+						// 	{
+						// 		name: 'Total',
+						// 		data: seriesData['total_connection']
+						// 	}
+						// ];
+						addChart('total_report', 'New connections', series);
+					}
+				});
+			}
+
+			// function getTotalData() {
+			// 	var uuid = $('#uuids').val();
+			// 	var db = $('#db').val();
+			// 	var support = $('#support').val();
+			// 	var url = '/report?db=' + db + '&uuid=' + uuid;
+			// 	if (support) {
+			// 		url += '&' + support + '=true';
+			// 	}
+			// 	$.ajax({url: url,
+			// 		success: function(data) {
+			// 			var seriesData = {
+			// 				ov_new_conn_l7: [],
+			// 				ov_new_conn_l4: [],
+			// 				ov_new_conn_ssl: [],
+			// 				ov_new_conn_ipnat: [],
+			// 				total_connection: []
+			// 			};
+			// 			for (var i in data) {
+			// 				var item = data[i];
+			// 				var timestamp = item['timestamp'];
+			// 				var records = item.data;
+			// 				seriesData['ov_new_conn_l7'].push([timestamp, records['ov_new_conn_l7']]);
+			// 				seriesData['ov_new_conn_l4'].push([timestamp, records['ov_new_conn_l4']]);
+			// 				seriesData['ov_new_conn_ssl'].push([timestamp, records['ov_new_conn_ssl']]);
+			// 				seriesData['ov_new_conn_ipnat'].push([timestamp, records['ov_new_conn_ipnat']]);
+			// 				seriesData['total_connection'].push([timestamp, records['total_connection']]);
+			// 			}
+
+			// 			var series = [
+			// 				{
+			// 					name: 'L7',
+			// 					data: seriesData['ov_new_conn_l7']
+			// 				},
+			// 				{
+			// 					name: 'L4',
+			// 					data: seriesData['ov_new_conn_l4']
+			// 				},
+			// 				{
+			// 					name: 'SSL',
+			// 					data: seriesData['ov_new_conn_ssl']
+			// 				},
+			// 				{
+			// 					name: 'IP NAT',
+			// 					data: seriesData['ov_new_conn_ipnat']
+			// 				},
+			// 				{
+			// 					name: 'Total',
+			// 					data: seriesData['total_connection']
+			// 				}
+			// 			];
+			// 			addChart('total_report', 'New connections', series);
+			// 		}
+			// 	});
+			// }
+			$('#getMore').click(getTotalData);
+			initObject();
+			// getTotalData();
+			// getAverageData();
+			// setInterval(getData, 5000);
+			});
+		</script>
+	</body>
+</html>
