@@ -17,7 +17,6 @@ app.get('/report', function(req, res) {
 });
 
 app.get('/obj', function(req, res) {
-  console.log('====>');
   reportApi.reportObj().then((records) => {
     res.send(records);
   });

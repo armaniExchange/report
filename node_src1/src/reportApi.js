@@ -1,5 +1,6 @@
 
-import KnowLevel from '../src/knowLevel';
+import KnowLevel from './knowLevel';
+import SchemaMapping from './SchemaMapping';
 
 import config from '../config';
 import filters from '../algorithm/filter';
@@ -10,6 +11,7 @@ class ReportApi {
   constructor() {
     this.knowLevels = {};
     this.initKnowLevel();
+    this.mapping = new SchemaMapping();
   }
 
   initKnowLevel() {
@@ -59,38 +61,46 @@ class ReportApi {
     return knowLevel;
   }
 
+  getQueryOptions(uuid, query) {
+    let startime = query.startime;
+    let endtime = query.endtime;
+    startime = startime ? startime : new Date().getTime() - 100 * 1000;
+    endtime = endtime ? endtime : new Date().getTime();
+    const start = `.rpt.${uuid}.0`;
+    const end = `.rpt.${uuid}.9`;
+    return {
+      keys: true, 
+      values: true,
+      start: start,
+      end: end,
+      limit: 100
+    };
+  }
+
   report(query) {
+    const self = this;
     return new Promise((resolve, reject) => {
       const uuid = query.uuid;
+      const oid = query.oid;
 
-      if (!uuid) {
-        reject();
-        return;
+      if (!uuid || !oid) {
+        reject(); return;
       }
 
       const db = query.db;
-
       let knowLevel = this.knowLevels[db];
       if (!knowLevel) {
         knowLevel = this.knowLevels['basic'];  
       }
 
-      let startime = query.startime;
-      let endtime = query.endtime;
-      startime = startime ? startime : new Date().getTime() - 100 * 1000;
-      endtime = endtime ? endtime : new Date().getTime();
-      
+      const options = self.getQueryOptions(uuid, query);
+      knowLevel.find(options, (records) => {
+        self.mapping.get(oid).then((map) => {
+          resolve({keyValue: map, values: records});
+        });
+      }, this.filter.bind(this, query));
 
-      // const start = '.time.2015.13f366fe-1699-11e7-b829-001fa001dd34.1491048879602';
-      const start = `.rpt.${uuid}.0`;
-      const end = `.rpt.${uuid}.9`;
-      knowLevel.find({
-        keys: true, 
-        values: true,
-        start: start,
-        end: end,
-        limit: 100
-      }, resolve, this.filter.bind(this, query));
+      
     });
   }
 

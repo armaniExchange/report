@@ -12,6 +12,61 @@ const reportApi = new ReportApi();
 
 reportApi.report({
   db: 'basic',
+  uuid: '2ef0dece-1a85-11e7-bb47-9b2823632af9',
+  total_connection: true
+}).then((records) => {
+  // console.log(records);
+  console.log(records.length);
+});
+
+reportApi.report({
+  db: 'basic',
+  uuid: '9e29b29e-15de-11e7-81f6-001fa001dd34',
+  total_connection: true
+}).then((records) => {
+  // console.log(records);
+  console.log(records.length);
+});
+
+reportApi.report({
+  db: 'basic',
+  uuid: '9e2a0802-15de-11e7-81f6-001fa001dd34',
+  total_connection: true
+}).then((records) => {
+  // console.log(records);
+  console.log(records.length);
+});
+
+reportApi.report({
+  db: 'basic',
+  uuid: '9e294f02-15de-11e7-81f6-001fa001dd34',
+  total_connection: true
+}).then((records) => {
+  // console.log(records);
+  console.log(records.length);
+});
+
+reportApi.report({
+  db: 'basic',
+  uuid: '9e294fde-15de-11e7-81f6-001fa001dd34',
+  total_connection: true
+}).then((records) => {
+  // console.log(records);
+  console.log(records.length);
+});
+
+reportApi.report({
+  db: 'basic',
+  uuid: '9e2950b0-15de-11e7-81f6-001fa001dd34',
+  total_connection: true
+}).then((records) => {
+  // console.log(records);
+  console.log(records.length);
+});
+
+reportApi.report({
+  db: 'basic',
+  uuid: '9e2952fe-15de-11e7-81f6-001fa001dd34',
   total_connection: true
 }).then((records) => {
   // console.log(records);

@@ -111,8 +111,6 @@ class ReportReduce {
         self.start(obj.oid, obj.uuid);
       });
     });
-
-    
   }
 
   start(oid, uuid) {

@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title></title>
+		<title>LevelDB Chart</title>
 		<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 	</head>
 	<body>
@@ -28,7 +28,7 @@
 
 				<button class="btn btn-success" id="getMore" style="margin-left: 20px;">Submit</button>
 			</div>
-			<div id="total_report" style="width: 1000px; height: 500px;"></div>
+			<div id="total_report" style="width: 1000px; height: 500px; border: 1px #ddd solid; margin-top: 30px;"></div>
 			<!--<div id="average_report" style="width: 1000px; height: 500px;"></div>-->
   	</div>
 		<script src="https://code.jquery.com/jquery-3.1.0.js"></script>
@@ -38,13 +38,15 @@
 		<script type="text/javascript">
 
 			$(document).ready(function(){
+			var oids = {};
 
 			function initObject() {
 				$.ajax({url: '/obj', success: function(data) {
-					console.log(data);
+					oids = data;
 					for (var i in data) {
 						var val = data[i];
-						$('#uuids').append('<option value="' + val.uuid + '">' + val.uuid + '</options>');
+						oids[val.oid] = val;
+						$('#uuids').append('<option value="' + val.oid + '">' + val.oid + '</options>');
 					}
 					getTotalData();
 				}});
@@ -52,12 +54,18 @@
 			
 			function addChart(id, title, series) {
 				var chart = Highcharts.chart(id, {
+					chart: {
+							type: 'spline'
+					},
+					credits: {
+						enabled: false
+					},
 					title: {
 							text: title
 					},
 					xAxis:{  
 						title: {  
-								text: '时间',  
+								text: 'Time',  
 								style: {  
 										color: '#4572A7'  
 								}  
@@ -66,7 +74,7 @@
           },  
 					yAxis: {
 							title: {
-									text: 'Number of Employees'
+									text: ''
 							}
 					},
 					legend: {
@@ -85,21 +93,26 @@
 			}
 
 			function getTotalData() {
-				var uuid = $('#uuids').val();
+				var oid = $('#uuids').val();
+				var uuidRecord = oids[oid];
 				var db = $('#db').val();
 				var support = $('#support').val();
-				var url = '/report?db=' + db + '&uuid=' + uuid;
+				var url = '/report?db=' + db + '&uuid=' + uuidRecord.uuid + '&oid=' + uuidRecord.oid;
 				if (support) {
 					url += '&' + support + '=true';
 				}
-				console.log(url);
 				$.ajax({url: url,
 					success: function(data) {
 						var seriesData = {
 						};
+						
+						var names = {};
+						for (var j in data.keyValue) {
+							names[data.keyValue[j]] = j;
+						}
 
-						for (var i in data) {
-							var item = data[i];
+						for (var i in data.values) {
+							var item = data.values[i];
 							var timestamp = item['timestamp'];
 							var records = item.data;
 							for (var index in records) {
@@ -111,10 +124,12 @@
 								seriesData[index] = seriesd;
 							}
 						}
-
+						
+						console.log(names);
 						var series = [];
 						for (var index in seriesData) {
-							series.push({name: index, data: seriesData[index]});
+							console.log(index, names[index]);
+							series.push({name: names[index], data: seriesData[index]});
 						}
 
 						// var series = [
