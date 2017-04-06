@@ -1,0 +1,6 @@
+autom4te.cache
+obj_db
+raw_db
+*.swp
+node_modules
+*.o
