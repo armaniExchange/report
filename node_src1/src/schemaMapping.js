@@ -22,7 +22,7 @@ class SchemaMapping{
 
         let mapping = {};
         _.forEach(properties, (options, key) => {
-          mapping[key] = options.oid;
+          mapping[key.split('_').map((v) => _.capitalize(v) ).join(' ')] = options.oid;
         });
         resolve(mapping);
       });
