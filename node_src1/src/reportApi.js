@@ -1,6 +1,6 @@
 
 import KnowLevel from './knowLevel';
-import SchemaMapping from './SchemaMapping';
+import SchemaMapping from './schemaMapping';
 
 import config from '../config';
 import filters from '../algorithm/filter';
