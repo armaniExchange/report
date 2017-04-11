@@ -8,13 +8,14 @@ class SchemaMapping{
   }
 
   get(objStatsId) {
+    const self = this;
     return new Promise((resolve, reject) => {
       if (!objStatsId) {
         reject();
         return;
       }
 
-      this.request.get(`obj-stats-id/${objStatsId}/schema`).then((result) => {
+      self.request.get(`obj-stats-id/${objStatsId}/schema`).then((result) => {
         const properties = _.get(result, ['properties', 'stats', 'properties']);
         if (!properties) {
           reject(); return;
@@ -22,7 +23,7 @@ class SchemaMapping{
 
         let mapping = {};
         _.forEach(properties, (options, key) => {
-          mapping[key.split('_').map((v) => _.capitalize(v) ).join(' ')] = options.oid;
+          mapping[_.words(key)] = options.oid;
         });
         resolve(mapping);
       });

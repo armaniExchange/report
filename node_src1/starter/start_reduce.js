@@ -2,6 +2,16 @@
 import ReportReduce from '../src/reportReduce';
 
 
-const report = new ReportReduce();
-// report.reduce(2015, '13f366fe-1699-11e7-b829-001fa001dd34');
-report.reduce();
+const duration = 5 * 1000;
+const reduce = () => {
+  console.log(new Date(), 'Start reduce:');
+  const report = new ReportReduce();
+  report.on('over', () => {
+    console.log(new Date(), 'End reduce, and registry next reduce.');
+    setTimeout(reduce, duration);
+  });
+  report.reduce();
+}
+
+reduce();
+

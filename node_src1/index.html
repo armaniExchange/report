@@ -28,6 +28,10 @@
 
 				<button class="btn btn-success" id="getMore" style="margin-left: 20px;">Submit</button>
 			</div>
+			<div style="margin-top: 30px;">
+				<span><strong>Start time</strong><span id="start-time"></span></span><br />
+				<span><strong>End time</strong><span id="end-time"></span></span>
+			</div>
 			<div id="total_report" style="width: 1000px; height: 500px; border: 1px #ddd solid; margin-top: 30px;"></div>
 			<!--<div id="average_report" style="width: 1000px; height: 500px;"></div>-->
   	</div>
@@ -39,7 +43,7 @@
 
 			$(document).ready(function(){
 			var oids = {};
-
+			Highcharts.setOptions({ global: { useUTC: false } });   
 			function initObject() {
 				$.ajax({url: '/obj', success: function(data) {
 					oids = data;
@@ -97,10 +101,13 @@
 				var uuidRecord = oids[oid];
 				var db = $('#db').val();
 				var support = $('#support').val();
+				var da = getTime();
 				var url = '/report?db=' + db + '&uuid=' + uuidRecord.uuid + '&oid=' + uuidRecord.oid;
 				if (support) {
 					url += '&' + support + '=true';
 				}
+				url += '&start-time=' + Math.round(da[0] / 1000);
+				url += '&end-time=' + Math.round(da[1] / 1000);
 				$.ajax({url: url,
 					success: function(data) {
 						var seriesData = {
@@ -113,7 +120,7 @@
 
 						for (var i in data.values) {
 							var item = data.values[i];
-							var timestamp = item['timestamp'];
+							var timestamp = item['timestamp'] * 1000;
 							var records = item.data;
 							for (var index in records) {
 								var seriesd = seriesData[index];
@@ -159,61 +166,38 @@
 				});
 			}
 
-			// function getTotalData() {
-			// 	var uuid = $('#uuids').val();
-			// 	var db = $('#db').val();
-			// 	var support = $('#support').val();
-			// 	var url = '/report?db=' + db + '&uuid=' + uuid;
-			// 	if (support) {
-			// 		url += '&' + support + '=true';
-			// 	}
-			// 	$.ajax({url: url,
-			// 		success: function(data) {
-			// 			var seriesData = {
-			// 				ov_new_conn_l7: [],
-			// 				ov_new_conn_l4: [],
-			// 				ov_new_conn_ssl: [],
-			// 				ov_new_conn_ipnat: [],
-			// 				total_connection: []
-			// 			};
-			// 			for (var i in data) {
-			// 				var item = data[i];
-			// 				var timestamp = item['timestamp'];
-			// 				var records = item.data;
-			// 				seriesData['ov_new_conn_l7'].push([timestamp, records['ov_new_conn_l7']]);
-			// 				seriesData['ov_new_conn_l4'].push([timestamp, records['ov_new_conn_l4']]);
-			// 				seriesData['ov_new_conn_ssl'].push([timestamp, records['ov_new_conn_ssl']]);
-			// 				seriesData['ov_new_conn_ipnat'].push([timestamp, records['ov_new_conn_ipnat']]);
-			// 				seriesData['total_connection'].push([timestamp, records['total_connection']]);
-			// 			}
+			function getTime() {
+				var db = $('#db').val();
+				var currentDate = new Date().getTime();
+				var duration = 300;
+				if (db === '30m') {
+					duration = 30 * 60;
+				} else if (db === '1h') {
+					duration = 3600;
+				} else if (db === '7h') {
+					duration = 7 * 3600;
+				} else if (db === '1d') {
+					duration = 24 * 3600;
+				} else if (db === '7d') {
+					duration = 7 * 24 * 3600;
+				} else if (db === '30d') {
+					duration = 30 * 24 * 3600;
+				}
 
-			// 			var series = [
-			// 				{
-			// 					name: 'L7',
-			// 					data: seriesData['ov_new_conn_l7']
-			// 				},
-			// 				{
-			// 					name: 'L4',
-			// 					data: seriesData['ov_new_conn_l4']
-			// 				},
-			// 				{
-			// 					name: 'SSL',
-			// 					data: seriesData['ov_new_conn_ssl']
-			// 				},
-			// 				{
-			// 					name: 'IP NAT',
-			// 					data: seriesData['ov_new_conn_ipnat']
-			// 				},
-			// 				{
-			// 					name: 'Total',
-			// 					data: seriesData['total_connection']
-			// 				}
-			// 			];
-			// 			addChart('total_report', 'New connections', series);
-			// 		}
-			// 	});
-			// }
+				return [currentDate - duration * 1000, currentDate];
+
+				
+			}
+
+			function changeDB() {
+				var da = getTime();
+				$('#end-time').html(new Date(da[1]));
+				$('#start-time').html(new Date(da[0]));
+		  }
+
+			changeDB();
 			$('#getMore').click(getTotalData);
+			$('#db').change(changeDB);
 			initObject();
 			// getTotalData();
 			// getAverageData();

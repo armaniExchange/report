@@ -14,6 +14,7 @@ class KnowLevel {
     if (!this.db) {
       const options = {
         valueEncoding: 'json',
+        blockSize: 1024 * 1024
       };
       this.db = level(`${config.dbPath}/${this.name}`, options);
     }
@@ -21,92 +22,103 @@ class KnowLevel {
     
   }
 
-  saveRecord(key, value, callback) {
-    try {
-      var db = this.getDB();
+  save(key, value) {
+    const self = this;
+    return new Promise((resolve, reject) => {
+      const db = self.getDB();
       db.put(key, value, function(err) {
-        // db.close();
-        if (err){
-          // some kind of I/O error
-          return console.log('Ooops!', err) 
-        };
-        if (callback && typeof(callback) === 'function') {
-          callback();
+        if (err) {
+          reject(err);
+        } else {
+          resolve();
         }
       })
-    } catch (e) {
-      console.log(e);
-    }
-  }
-
-  findRecord(key, callback) {
-    try {
-      var db = this.getDB();
-      db.get(key, function (err, value) {
-        // db.close();
-        if (err) {
-          // likely the key was not found
-          return console.log('Ooops!', err);
-        }
-        if (callback && typeof(callback) === 'function') {
-          callback(value);
-        }
-      });
-    } catch(e) {
-      console.log(e);
-    }
-  }
-
-  find(options, callback, filter) {
-    const self = this;
-    try {
-      let records = [];
-      const db = self.getDB();
-      db.createReadStream(options)
-        .on('data', (data) => {
-          const key = data.key;
-          let value = data.value;
-          if (typeof(value) === 'string') {
-            value = JSON.parse(value);
-          }
-          if (self.type === 'report') {
-            const keys = key.split('.');
-            if (keys.length === 5) {
-              const timestamp = parseInt(keys[3]);
-              if (filter && typeof(filter) === 'function') {
-                filter(keys[4], value);
-              }
-              records.push({
-                timestamp: timestamp,
-                data: value
-              });
-            }
-          } else {
-            records.push(value);
-          }
-          
-          
-        })
-        .on('end', () => {
-          // db.close();
-          if (callback && typeof(callback) === 'function') {
-            callback(records);
-          }
-        });
-      
-    } catch(e) {
-      console.log(e);
-    }
-  }
-
-  batch(options, callback) {
-    const db = this.getDB();
-    db.batch(options, (err) => {
-      if (err) {
-        console.log('Ooops!', err)
-      }
     });
   }
+
+  analysisRecord(data, filter) {
+    const self = this;
+    const key = data.key;
+    let value = data.value;
+    if (typeof(value) === 'string') {
+      value = JSON.parse(value);
+    }
+
+    if (self.type != 'report') {
+      return value;
+    }
+
+    // Handle report data.
+    const keys = key.split('.');
+    if (keys.length === 5) {
+      const timestamp = parseInt(keys[3]);
+      if (filter && typeof(filter) === 'function') {
+        filter(keys[4], value);
+      }
+      return {timestamp: timestamp, data: value};
+    }
+  }
+
+  find(options, filter) {
+    const self = this;
+    return new Promise((resolve, reject) => {
+      let records = [];
+      const db = self.getDB();
+      options = options || {};
+      options = Object.assign({ keys: true, values: true }, options);
+      db.createReadStream(options)
+        .on('data', (data) => {
+          if (data) {
+            records.push(self.analysisRecord(data, filter));
+          }
+        })
+        .on('end', () => {
+          resolve(records);
+        });
+    });
+  }
+
+  findWithKey(options) {
+    const self = this;
+    return new Promise((resolve, reject) => {
+      let records = [];
+      const db = self.getDB();
+      options = options | {};
+      options = Object.assign({ keys: true, values: true }, options);
+      db.createReadStream(options)
+        .on('data', (data) => {
+          if (data) {
+            records.push(data);
+          }
+        })
+        .on('end', () => {
+          resolve(records);
+        });
+    });
+  }
+
+  batch(options) {
+    const self = this;
+    console.log(options);
+    return new Promise((resolve, reject) => {
+      const db = self.getDB();
+      db.batch(options, (err) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve();
+        }
+      });
+    });
+  }
+
+  close() {
+    const db = this.getDB();
+    if (db && !db.isClosed()) {
+      db.close();
+    }
+  }
+
 }
 
 export default KnowLevel;

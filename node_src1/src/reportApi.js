@@ -4,6 +4,7 @@ import SchemaMapping from './schemaMapping';
 
 import config from '../config';
 import filters from '../algorithm/filter';
+import * as utils from './utils';
 import _ from 'lodash';
 
 class ReportApi {
@@ -61,18 +62,28 @@ class ReportApi {
     return knowLevel;
   }
 
-  getQueryOptions(uuid, query) {
-    let startime = query.startime;
-    let endtime = query.endtime;
+  getStartTime(query) {
+    let startime = query['start-time'];
     startime = startime ? startime : new Date().getTime() - 100 * 1000;
+    return startime;  
+  }
+
+  getEndTime(query) {
+    let endtime = query['end-time'];
     endtime = endtime ? endtime : new Date().getTime();
-    const start = `.rpt.${uuid}.0`;
-    const end = `.rpt.${uuid}.9`;
+    return endtime;
+  }
+
+  getQueryOptions(uuid, query) {
+    const startime = this.getStartTime(query);
+    const endtime = this.getEndTime(query);
+    const start = `.rpt.${uuid}.${startime}`;
+    const end = `.rpt.${uuid}.${endtime}`;
     return {
       keys: true, 
       values: true,
-      start: start,
-      end: end,
+      gte: start,
+      lte: end,
       limit: 100
     };
   }
@@ -86,36 +97,62 @@ class ReportApi {
       if (!uuid || !oid) {
         reject(); return;
       }
-
       const db = query.db;
       let knowLevel = this.knowLevels[db];
       if (!knowLevel) {
         knowLevel = this.knowLevels['basic'];  
       }
 
+      const dbOptions = config.reducedDB[db];
+
       const options = self.getQueryOptions(uuid, query);
-      knowLevel.find(options, (records) => {
+      console.log(options);
+      knowLevel.find(options, this.filter.bind(this, query)).then((records) => {
+        if (dbOptions) {
+          self.packageResult(records, self.getStartTime(query), self.getEndTime(query), dbOptions.interval);
+        }
         self.mapping.get(oid).then((map) => {
           resolve({keyValue: map, values: records});
         });
-      }, this.filter.bind(this, query));
-
-      
+      });
     });
+  }
+
+  packageResult(result, start, end, duration) {
+    console.log(start);
+    if (!result || result.length === 0) {
+      return [{timestamp: start, data: []}, {timestamp: end, data: []}];
+    }
+
+    const zeroPoint = utils.zeroPoint(result[0].data);
+
+    const resultStartTimestamp = result[0].timestamp;
+    const resultEndTimestamp = result[result.length - 1].timestamp;
+    if (resultStartTimestamp - start > 2 * duration) {
+      result.unshift({timestamp: resultStartTimestamp - duration, data: zeroPoint});
+      result.unshift({timestamp: start, data: zeroPoint});
+    }
+    if (resultStartTimestamp - start < 2 * duration && resultStartTimestamp - start > duration) {
+      result.unshift({timestamp: start, data: zeroPoint});
+    }
+
+    if (end - resultEndTimestamp > 2 * duration) {
+      result.push({timestamp: resultEndTimestamp + duration, data: zeroPoint});
+      result.push({timestamp: end, data: zeroPoint});
+    }
+
+    if (end - resultEndTimestamp <= 2 * duration && end - resultEndTimestamp > duration) {
+      result.push({timestamp: end, data: zeroPoint});
+    }
+
   }
 
   reportObj() {
     return new Promise((resolve, reject) => {
       const knowLevel = this.getKnowLevel('obj');
-      knowLevel.find({
-        values: true
-      }, (records) => {
-        console.log(records);
-        resolve(records);
-      });
+      knowLevel.find({ values: true }).then(resolve);
     });
   }
-
 }
 
 export default ReportApi;
