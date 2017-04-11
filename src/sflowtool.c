@@ -3287,40 +3287,6 @@ uint64_t ntohll(uint64_t val) {
     return (((uint64_t) ntohl(val)) << 32) + ntohl(val >> 32);
 }
 
-static void readCounters_a10_generic(SFSample *sample)
-{
-	printf("\n<<Inside readCounters_a10_generic>>>\n");
-        int len = 0;
-        long tstamp = time(NULL);
-        char tbuf [200];
-        sprintf (tbuf, "agent=%08x\n", htonl(sample->agent_addr.address.ip_v4.addr));
-        tbuf[strlen(tbuf)] = 0;
-        struct sfl_a10_custom_info *a10_custom = (struct sfl_a10_custom_info *)(sample->datap);
-        sample->datap =  (u_char *)sample->datap + sizeof(struct sfl_a10_custom_info);
-        printf("uuid = %s\n", a10_custom->uuid);
-        int obj_stats_oid = ntohl(a10_custom->schema_oid);
-        printf("obj_stats_oid = %d \n", obj_stats_oid);
-        printf("schema oid = %d\n", obj_stats_oid);
-        printf("vnp_id of ctr = %d\n", ntohl(a10_custom->vnp_id));
-        sample->current_context_length = sample->current_context_length-sizeof(struct sfl_a10_custom_info);
-        int number_of_counters =  sample->current_context_length/sizeof(struct sflow_flex_kv);
-        printf("Number of counters = %d\n", number_of_counters);
-        struct sflow_flex_kv *kv = (struct sflow_flex_kv *)(sample->datap);
-        int i;
-
-	if (strlen(a10_custom->uuid) != 36){
-        	return;         
-	}
-	for(i = 0; i<number_of_counters; i++){
-		if (strlen(a10_custom->uuid) != 36) {
-			continue;
-		}
-		printf("key = %d value  = %ld\n", ntohl(kv[i].key), ntohll(kv[i].value));
-	}
-       // int ret = leveldb_simple_connect(tsdb_buff);
-        skipBytes(sample, sample->current_context_length);
-}
-
 
 void write_object_id(char *obj_id, int oid, char *uuid)
 {
@@ -5483,53 +5449,6 @@ int main(int argc, char *argv[])
 }
 
 
-
-int opentsdb_connect_socket()
-{
-    struct sockaddr_in echoServAddr; /* Echo server address */
-    unsigned short echoServPort;     /* Echo server port */
-    static int error_flag = 0;
-    //    int bytesRcvd, totalBytesRcvd;   /* Bytes read in single recv()
-    //                                        and total bytes read */
-
-    char *servIP = "127.0.0.1";             /* First arg: server IP address (dotted quad) */
-    echoServPort = 4242;
-
-    /* Create a reliable, stream socket using TCP */
-    if ((g_opentsdb_sock = socket(PF_INET, SOCK_STREAM, IPPROTO_TCP)) < 0) {
-        dump_syslog (LOG_ERR, "Unable to create opentsdb socket\n"); 
-        return 1;
-    }
-
-    int option_val = 1;
-    setsockopt( g_opentsdb_sock, IPPROTO_TCP, TCP_NODELAY, (void *)&option_val, sizeof(option_val));
-
-    option_val = 4024;
-    setsockopt( g_opentsdb_sock, IPPROTO_TCP, TCP_MAXSEG, (void *)&option_val, sizeof(option_val));
-
-    /* Construct the server address structure */
-    echoServAddr.sin_family      = AF_INET;             /* Internet address family */
-    echoServAddr.sin_addr.s_addr = inet_addr(servIP);   /* Server IP address */
-    echoServAddr.sin_port        = htons(echoServPort); /* Server port */
-
-    /* Establish the connection to the echo server */
-    if (connect(g_opentsdb_sock, (struct sockaddr *) &echoServAddr, sizeof(echoServAddr)) < 0) {
-        if (!error_flag) {
-            dump_syslog (LOG_ERR, "Unable to connect to opentsdb server %s port %d\n", servIP, echoServPort); 
-        }
-
-        error_flag = 1;
-        close(g_opentsdb_sock);
-        return 1;
-    } else {
-        g_opentsdb_socket_connected = 1;
-        dump_syslog (LOG_INFO, "Connected to opentsdb server %s port %d\n", servIP, echoServPort); 
-        error_flag = 0;
-        return 0;
-    }
-}
-
-
 int leveldb_simple_connect(leveldb_t *db)
 {
     leveldb_options_t *options;
@@ -5550,6 +5469,8 @@ int leveldb_simple_connect(leveldb_t *db)
     return 0;
 }
 
+leveldb_writebatch_t* write_batch = NULL;
+int batch = 0;
 int leveldb_simple_write_data(char *key, char *value, char *db_name) {
     leveldb_t *db;
     leveldb_options_t *options;
@@ -5557,12 +5478,18 @@ int leveldb_simple_write_data(char *key, char *value, char *db_name) {
     /******************************************/
     /* OPEN */
 
+    size_t key_len = strlen(key), value_len = strlen(value);
     options = leveldb_options_create();
     leveldb_options_set_create_if_missing(options, 1);
     db = leveldb_open(options, db_name, &err);
 
     if (err != NULL) {
       fprintf(stderr, "Open fail: %s.\n", err);
+      if(write_batch == NULL) {
+        write_batch = leveldb_writebatch_create();
+      }
+      leveldb_writebatch_put(write_batch, key, key_len, value, value_len);
+      batch = 1;
       return(1);
     }
 
@@ -5571,8 +5498,17 @@ int leveldb_simple_write_data(char *key, char *value, char *db_name) {
     /******************************************/
     /* WRITE */
     leveldb_writeoptions_t *woptions;
-    size_t key_len = strlen(key), value_len = strlen(value);
     //printf("Start putting into DB, %s, %d, %s, %d\n", key, key_len, value, value_len);
+    woptions = leveldb_writeoptions_create();
+    if(batch) {
+        leveldb_write(db, woptions, write_batch, &err);
+        leveldb_writebatch_clear(write_batch);
+        batch = 0;
+    }
+    if (err != NULL) {
+      fprintf(stderr, "Write batch fail.\n");
+      return(1);
+    }
     woptions = leveldb_writeoptions_create();
     leveldb_put(db, woptions, key, key_len, value, value_len, &err);
 
