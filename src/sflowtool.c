@@ -18,7 +18,7 @@
  */
 /* Copyright (c) 2002-2011 InMon Corp. Licensed under the terms of the InMon sFlow licence: */
 /* http://www.inmon.com/technology/sflowlicense.txt */
-
+//hello
 #if defined(__cplusplus)
 extern "C" {
 #endif
